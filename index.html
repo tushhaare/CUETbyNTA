@@ -1,68 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
-    <title>CUETbyNTA</title>
+    <head>
+        <meta charset="utf-8">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+        <link rel="shortcut icon" href="assets/images/favicon.png" type="image/webp">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
+        <link rel="icon" href="assets/images/favicon.png" type="image/webp">
+        <title>CUETbyNTA</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Snowfall Background Animation -->
+        <section class="animated-background">
+            <div id="stars1"></div>
+            <div id="stars2"></div>
+            <div id="stars3"></div>
+        </section>
+        <!-- End of Snowfall Background Animation -->
+
+        <div class="min-h-full flex-h-center" id="background_div">
+            <input type="hidden" value="https://bio.link" id="app-url">
+                <input type="hidden" value="null" id="is-featured">
+                    <canvas id="bg-canvas" class="background-overlay"></canvas>
+                </input>
+            </input>
     
-    <!-- Favicon & Fonts -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/webp">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon.png">
-    <link rel="icon" href="assets/images/favicon.png" type="image/webp">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
-    <link href="assets/css/style.css" rel="stylesheet">
-</head>
-<body>
-
-    <!-- Snowfall Background Animation -->
-    <section class="animated-background">
-        <div id="stars1"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-    </section>
-
-    <!-- Background Canvas -->
-    <canvas id="bg-canvas" class="background-overlay"></canvas>
-
-    <!-- Page Content -->
-    <main class="min-h-full flex-h-center" id="background_div">
-        <input type="hidden" id="app-url" value="https://bio.link">
-        <input type="hidden" id="is-featured" value="null">
-        <input type="hidden" id="page-type" value="creator-page">
-
-        <div class="content-container text-center">
-            <h1 class="page-heading color-white text-fs-22 font-weight-600 mt-48">CBT Full Mock Tests - CUETbyNTA</h1>
-
-            <img class="display-image m-auto mt-24" src="/logo.png" alt="CUETbyNTA Logo">
-
-            <div class="links-container mt-32">
-                <a class="page-item-each page-item color-white text-center font-inter font-weight-500 w-full py-10 mt-12 text-fs-16" href="/mock-tests/english.html" target="_blank">
-                    English #1
-                </a>
-                <a class="page-item-each page-item color-white text-center font-inter font-weight-500 w-full py-10 mt-12 text-fs-16" href="/mock-tests/english1.html" target="_blank">
-                    English #2
-                </a>
-                <a class="page-item-each page-item color-white text-center font-inter font-weight-500 w-full py-10 mt-12 text-fs-16" href="/mock-tests/polsci.html" target="_blank">
-                    Political Science
-                </a>
-                <a class="page-item-each page-item color-white text-center font-inter font-weight-500 w-full py-10 mt-12 text-fs-16" href="/mock-tests/history.html" target="_blank">
-                    History
-                </a>
-                <a class="page-item-each page-item color-white text-center font-inter font-weight-500 w-full py-10 mt-12 text-fs-16" href="/mock-tests/geography.html" target="_blank">
-                    Geography
-                </a>
-                <a class="page-item-each page-item color-white text-center font-inter font-weight-500 w-full py-10 mt-12 text-fs-16" href="https://instagram.com/cuetbynta" target="_blank">
-                    Follow us on Instagram
-                </a>
+        <div>
+ <element class="h1"><h1>CBT Full Mock Tests - CUETbyNTA</h1></element>
+    </div>
+            <div class="mt-48 page-full-wrap relative ">
+                <input type="hidden" value="creator-page" id="page-type">
+                <img class="display-image m-auto" data-src="/logo.png" src="/logo.png" alt="LOGO-CUETBYNTA"/>
+                       
+                <div class="mt-24">
+                    <div class="page-item-wrap relative">
+                        <div class="page-item flex-both-center absolute"></div>
+                        <a target="_blank"  class="page-item-each py-10 flex-both-center" href="/mock-tests/english.html" data-id="261652" data-type="page_item">
+                            <span class=" item-title text-center">English #1</span>
+                        </a>
+                    </div>        
+                    <div class="page-item-wrap relative">
+                        <div class="page-item flex-both-center absolute"></div>
+                        <a target="_blank"  class="page-item-each py-10 flex-both-center" href="/mock-tests/english1.html" data-id="261685" data-type="page_item">
+                            <span class=" item-title text-center">English #2</span>
+                        </a>
+                    </div>    
+                    <div class="page-item-wrap relative">
+                        <div class="page-item flex-both-center absolute"></div>
+                        <a target="_blank"  class="page-item-each py-10 flex-both-center" href="/mock-tests/polsci.html" data-id="261685" data-type="page_item">
+                            <span class=" item-title text-center">Political Science</span>
+                        </a>
+                    </div>                            
+                    <div class="page-item-wrap relative">
+                        <div class="page-item flex-both-center absolute"></div>
+                        <a target="_blank"  class="page-item-each py-10 flex-both-center" href="/mock-tests/history.html" data-id="261685" data-type="page_item">
+                            <span class=" item-title text-center">History</span>
+                        </a>
+                    </div>
+                    <div class="page-item-wrap relative">
+                        <div class="page-item flex-both-center absolute"></div>
+                        <a target="_blank"  class="page-item-each py-10 flex-both-center" href="/mock-tests/geography.html" data-id="261685" data-type="page_item">
+                            <span class=" item-title text-center">Geography</span>
+                        </a>
+                    </div>
+                        <div class="page-item-wrap relative">
+                            <div class="page-item flex-both-center absolute"></div>
+                            <a target="_blank"  class="page-item-each py-10 flex-both-center" href="https://instagram.com/cuetbynta" data-id="261652" data-type="page_item">
+                                <span class=" item-title text-center">Follow us on Instagram</span>
+                            </a>
+                    </div>                    
+                </div>                                                                                
             </div>
         </div>
-    </main>
-</body>
+    </body>
 
-    <!-- Optional: Alternative Snowfall -->
-    <!-- <script src="assets/js/snowfall.js"></script> -->
-
-</body>
+    <!--
+    A different snowfall    
+    <script  src="assets/js/snowfall.js"></script>
+    -->
 </html>
