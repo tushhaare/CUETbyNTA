@@ -190,23 +190,28 @@ body,html{
     bottom:32px;
     left:calc(50% - 15px)
 }
-.page-item-each{
-    text-decoration:none;
-    overflow:hidden;
-    z-index:10;
-    box-sizing:border-box
+.page-item-each {
+    background-color: #1F365C;
+    border-radius: 8px;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.2s ease;
 }
-.page-item-title{
-    font-weight:700;
-    margin-bottom:16px
+
+.page-item-each:hover {
+    transform: scale(1.03);
+    background-color: #2b4d7f;
 }
-.page-full-wrap{
-        width:90%
-    }
-.page-overlay-title{
-        font-size:24px;
-        margin:16px 0
-    }
+
+.color-white {
+    color: #fff;
+}
+
+.page-heading {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+}
 
 
 /* === Remaining Styles === */
