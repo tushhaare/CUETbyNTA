@@ -1,9 +1,10 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js';
-import { jsPDF } from "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
 
 const SUPABASE_URL = 'https://bvokjeuarlwbqdquhlps.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2b2tqZXVhcmx3YnFkcXVobHBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyNTAxODMsImV4cCI6MjA2NTgyNjE4M30.yMOEGDU2paNU7tELbZG9ATyyrhnOvzDgmZ7Pb2uTXcI'; // your full key here
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const { jsPDF } = window.jspdf;
+
 
 document.getElementById("predictorForm").addEventListener("submit", function (e) {
     e.preventDefault();
