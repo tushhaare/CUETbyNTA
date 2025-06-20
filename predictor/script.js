@@ -7,6 +7,11 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.getElementById("predictorForm").addEventListener("submit", function (e) {
     e.preventDefault();
+    const score = parseFloat(document.getElementById("cuetScore").value);
+if (isNaN(score) || score < 0 || score > 1000) {
+    alert("❌ Please enter a valid CUET score between 0 and 1000.");
+    return;
+}
 
     const name = document.getElementById("name").value.trim();
     const score = parseFloat(document.getElementById("cuetScore").value);
