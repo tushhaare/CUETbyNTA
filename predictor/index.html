@@ -5,6 +5,7 @@
     <title>DU College Predictor by DUaid</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tabletop@1.5.4/tabletop.min.js"></script>
 </head>
 <body>
@@ -73,6 +74,8 @@
       <strong>Disclaimer:</strong> This tool uses last year's data for reference. We do not claim accuracy in predictions.
     </p>
     <pre id="result" class="result-box"></pre>
+    <button id="downloadPdf" style="display:none;">Download PDF Report</button>
+
   </div>
 
   <script type="module" src="script.js"></script>
