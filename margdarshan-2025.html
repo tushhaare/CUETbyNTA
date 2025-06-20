@@ -32,6 +32,8 @@
       align-items: center;
       padding: 1rem 2rem;
       background: rgba(255, 255, 255, 0.9);
+      position: relative;
+      z-index: 999;
     }
     .logo {
       font-weight: bold;
@@ -47,6 +49,38 @@
       text-decoration: none;
       color: #003366;
       font-weight: bold;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #003366;
+      margin: 4px 0;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }.nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      .nav-links a {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+      .nav-links.show {
+        display: flex;
+      }
     }
     .hero {
       position: relative;
@@ -183,10 +217,16 @@
 </video>
   <header>
     <a href="/" class="logo">CUETbyNTA</a>
+    <div class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
     <div class="nav-links">
       <a href="https://duaid.pages.dev/predictor">College Predictor</a>
       <a href="/cbt-mocks">CBT Mocks</a>
-  </header>
+    </div>
+      </header>
   <div class="hero">
     <h1>Crack DU Admissions 2025<br><strong>with 1:1 Mentorship</strong></h1>
     <p>Complete CSAS Guidance & Strategy with Unlimited Support!</p>
@@ -198,8 +238,8 @@
     <div class="price-tag">
       <p>MARGDARSHAN 2025</p>
       <p><del>₹249</del> <span>  ₹199  </span> <strong>  20% OFF  </strong></p>
-      <button class="join-btn" onclick="window.location.href='https://your-join-page-link.com'">Download Brochure</button>
-      <button class="join-btn1" onclick="window.location.href='https://your-join-page-link.com'">Enroll Now</button>
+      <button class="join-btn" onclick="window.location.href='https://cuetbynta.pages.dev/MARGDARSHAN.pdf'">Download Brochure</button>
+      <button class="join-btn1" onclick="window.location.href=''">Enroll Now</button>
     </div>
   </div>
 
