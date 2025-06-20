@@ -14,7 +14,6 @@ if (isNaN(score) || score < 0 || score > 1000) {
 }
 
     const name = document.getElementById("name").value.trim();
-    const score = parseFloat(document.getElementById("cuetScore").value);
     const course = document.getElementById("course").value.trim();
     const category = document.getElementById("category").value.trim();
     const gender = document.getElementById("gender").value.trim();
