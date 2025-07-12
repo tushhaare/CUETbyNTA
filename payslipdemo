@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MARGDARSHAN Mentor Pay Slip</title>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 40px auto;
+      max-width: 1000px;
+      border: 1px solid #ccc;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background-color: #fdfdfd;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header img {
+      height: 70px;
+    }
+    h1 {
+      margin-top: 10px;
+      font-size: 24px;
+      color: #2c3e50;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-top: 30px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+      font-size: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .total {
+      font-weight: bold;
+      background-color: #eafaf1;
+    }
+    .horizontal-table {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .horizontal-table .box {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 15px;
+      background-color: #fafafa;
+    }
+    .box-title {
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .explanation {
+      font-size: 14px;
+      margin-top: 20px;
+      background: #f4f8ff;
+      border: 1px solid #d0e2ff;
+      padding: 15px;
+      border-radius: 5px;
+      color: #333;
+    }
+    .sign {
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .sign div {
+      text-align: center;
+      width: 45%;
+    }
+    .sign img {
+      height: 60px;
+      margin-bottom: 5px;
+    }
+    #signature-pad {
+      border: 2px dashed #ccc;
+      border-radius: 5px;
+      height: 150px;
+      width: 100%;
+      background-color: #fff;
+      cursor: crosshair;
+    }
+    .sig-actions {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body id="pay-slip">
+
+  <div class="header">
+    <img src="logo.png" alt="CUETbyNTA Logo">
+    <h1>MARGDARSHAN | Mentor Pay Slip</h1>
+  </div>
+
+  <div class="section-title">Mentor & Payment Details</div>
+  <table>
+    <tr><th>Mentor Name</th><td>__________________________</td></tr>
+    <tr><th>Mentor ID</th><td>__________________________</td></tr>
+    <tr><th>Pay Slip No.</th><td>MARG-_____/2025</td></tr>
+    <tr><th>Pay Date</th><td>____ / ____ / 2025</td></tr>
+    <tr><th>Batch</th><td>MARGDARSHAN 2025</td></tr>
+    <tr><th>Mentorship Duration</th><td>__________________________</td></tr>
+    <tr><th>Total Mentees Assigned</th><td>_____</td></tr>
+    <tr><th>Payment Mode</th><td>UPI / Bank Transfer / Other: ___________________</td></tr>
+    <tr><th>Transaction ID / Ref. No.</th><td>__________________________</td></tr>
+    <tr><th>Date & Time of Transaction</th><td>____ / ____ / 2025 &nbsp;&nbsp; ⏰ __:__ AM/PM</td></tr>
+  </table>
+
+  <div class="section-title">Fee Category Breakdown</div>
+
+  <div class="explanation">
+    <strong>Explanation:</strong><br>
+    <ul style="margin-top: 5px; padding-left: 20px;">
+      <li><strong>Case A:</strong> For students who paid ₹199 under early bird offer. After a 15% deduction for community management, the mentor receives ₹169 per mentee.</li>
+      <li><strong>Case B:</strong> For students who joined later at ₹249. After the same 15% deduction, the mentor receives ₹210 per mentee.</li>
+    </ul>
+  </div>
+
+  <div class="horizontal-table">
+    <div class="box">
+      <div class="box-title">Case A: ₹199 Plan</div>
+      <table>
+        <tr><th>Description</th><th>Amount (INR)</th></tr>
+        <tr><td>Total Mentees in ₹199 Plan</td><td>_____</td></tr>
+        <tr><td>Pay per Mentee (After 15% Cut)</td><td>₹169</td></tr>
+        <tr><td>Subtotal (₹169 x Mentees)</td><td>₹______</td></tr>
+        <tr><td>Community Management Deduction</td><td>Included</td></tr>
+        <tr class="total"><td><strong>Total Payable (A)</strong></td><td>₹______</td></tr>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="box-title">Case B: ₹249 Plan</div>
+      <table>
+        <tr><th>Description</th><th>Amount (INR)</th></tr>
+        <tr><td>Total Mentees in ₹249 Plan</td><td>_____</td></tr>
+        <tr><td>Pay per Mentee (After 15% Cut)</td><td>₹210</td></tr>
+        <tr><td>Subtotal (₹210 x Mentees)</td><td>₹______</td></tr>
+        <tr><td>Community Management Deduction</td><td>Included</td></tr>
+        <tr class="total"><td><strong>Total Payable (B)</strong></td><td>₹______</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-title">Grand Total</div>
+  <table>
+    <tr class="total">
+      <td><strong>Grand Total Paid</strong></td>
+      <td>₹ ___________</td>
+    </tr>
+  </table>
+
+  <div class="section-title">Digital Signature</div>
+  <div class="sign">
+    <div>
+      <img src="authorized-sign.png" alt="Authorized Signature">
+      <p><strong>Authorized By</strong><br>DUaid Core Team</p>
+    </div>
+    <div>
+      <p><strong>Mentor Signature (Digital):</strong></p>
+      <canvas id="signature-pad"></canvas>
+      <div class="sig-actions">
+        <button class="btn" onclick="signaturePad.clear()">Clear Signature</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center">
+    <button class="btn" onclick="exportToPDF()">Download PDF</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('signature-pad');
+    const signaturePad = new SignaturePad(canvas);
+
+    async function exportToPDF() {
+      const { jsPDF } = window.jspdf;
+      const slip = document.getElementById("pay-slip");
+
+      const canvasImage = await html2canvas(slip, {
+        scale: 2,
+        useCORS: true
+      });
+
+      const imgData = canvasImage.toDataURL("image/png");
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save("Mentor_Pay_Slip.pdf");
+    }
+  </script>
+</body>
+</html>
