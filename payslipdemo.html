@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MARGDARSHAN Mentor Pay Slip</title>
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -9,19 +10,24 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 40px auto;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .container {
       max-width: 1000px;
-      border: 1px solid #ccc;
+      margin: auto;
+      background: #fff;
       padding: 30px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      background-color: #fdfdfd;
+      border-radius: 10px;
     }
     .header {
       text-align: center;
       margin-bottom: 20px;
     }
     .header img {
-      height: 70px;
+      max-height: 70px;
     }
     h1 {
       margin-top: 10px;
@@ -31,9 +37,9 @@
     .section-title {
       font-weight: bold;
       margin-top: 30px;
-      border-bottom: 2px solid #ccc;
       padding-bottom: 5px;
       font-size: 18px;
+      border-bottom: 2px solid #ccc;
     }
     table {
       width: 100%;
@@ -44,6 +50,7 @@
       border: 1px solid #999;
       padding: 10px;
       text-align: left;
+      word-break: break-word;
     }
     th {
       background-color: #f4f4f4;
@@ -54,14 +61,16 @@
     }
     .horizontal-table {
       display: flex;
+      flex-wrap: wrap;
       gap: 20px;
       margin-top: 20px;
     }
     .horizontal-table .box {
-      flex: 1;
+      flex: 1 1 300px;
       border: 1px solid #ccc;
       padding: 15px;
       background-color: #fafafa;
+      border-radius: 8px;
     }
     .box-title {
       font-weight: bold;
@@ -81,23 +90,25 @@
     .sign {
       margin-top: 40px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
+      gap: 20px;
     }
     .sign div {
+      flex: 1 1 45%;
       text-align: center;
-      width: 45%;
     }
     .sign img {
       height: 60px;
       margin-bottom: 5px;
     }
     #signature-pad {
+      width: 100%;
+      height: 200px;
       border: 2px dashed #ccc;
       border-radius: 5px;
-      height: 150px;
-      width: 100%;
       background-color: #fff;
-      cursor: crosshair;
+      touch-action: none;
     }
     .sig-actions {
       text-align: center;
@@ -111,18 +122,39 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 14px;
     }
     .btn:hover {
       background-color: #0056b3;
     }
+    .email-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .email-section input {
+      padding: 10px;
+      width: 300px;
+      max-width: 100%;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    @media (max-width: 600px) {
+      .sign div {
+        flex: 1 1 100%;
+      }
+      #signature-pad {
+        height: 150px;
+      }
+    }
   </style>
 </head>
-<body id="pay-slip">
-
-  <div class="header">
-    <img src="logo.png" alt="CUETbyNTA Logo">
-    <h1>MARGDARSHAN | Mentor Pay Slip</h1>
-  </div>
+<body>
+  <div class="container" id="pay-slip">
+    <div class="header">
+      <img src="logo.png" alt="CUETbyNTA Logo">
+      <h1>MARGDARSHAN | Mentor Pay Slip</h1>
+    </div>
 
   <div class="section-title">Mentor & Payment Details</div>
   <table>
@@ -183,46 +215,61 @@
   </table>
 
   <div class="section-title">Digital Signature</div>
-  <div class="sign">
-    <div>
-      <img src="authorized-sign.png" alt="Authorized Signature">
-      <p><strong>Authorized By</strong><br>DUaid Core Team</p>
-    </div>
-    <div>
-      <p><strong>Mentor Signature (Digital):</strong></p>
-      <canvas id="signature-pad"></canvas>
-      <div class="sig-actions">
-        <button class="btn" onclick="signaturePad.clear()">Clear Signature</button>
+    <div class="sign">
+      <div>
+        <img src="authorized-sign.png" alt="Authorized Signature">
+        <p><strong>Authorized By</strong><br>DUaid Core Team</p>
+      </div>
+      <div>
+        <p><strong>Mentor Signature (Digital):</strong></p>
+        <canvas id="signature-pad"></canvas>
+        <div class="sig-actions">
+          <button class="btn" onclick="signaturePad.clear()">Clear Signature</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div style="text-align:center">
-    <button class="btn" onclick="exportToPDF()">Download PDF</button>
+    <div class="email-section">
+      <button class="btn" onclick="downloadPDF()">Download Pay Slip (PDF)</button>
+    </div>
   </div>
 
   <script>
     const canvas = document.getElementById('signature-pad');
-    const signaturePad = new SignaturePad(canvas);
+    const signaturePad = new SignaturePad(canvas, {
+      backgroundColor: 'rgb(255,255,255)'
+    });
 
-    async function exportToPDF() {
-      const { jsPDF } = window.jspdf;
+    function resizeCanvas() {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      canvas.getContext("2d").scale(ratio, ratio);
+      signaturePad.clear();
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    async function downloadPDF() {
       const slip = document.getElementById("pay-slip");
-
       const canvasImage = await html2canvas(slip, {
         scale: 2,
         useCORS: true
       });
 
       const imgData = canvasImage.toDataURL("image/png");
-      const pdf = new jsPDF('p', 'pt', 'a4');
+
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("p", "pt", "a4");
       const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
       pdf.save("Mentor_Pay_Slip.pdf");
     }
   </script>
 </body>
 </html>
+
