@@ -551,6 +551,16 @@
 <!-- Jquery Plugins, main Jquery -->	
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
+<script>
+window.addEventListener("scroll", function () {
+    const header = document.querySelector(".header-area");
+    if (window.scrollY > 100) {
+        header.classList.add("header-sticky");
+    } else {
+        header.classList.remove("header-sticky");
+    }
+});
+</script>
 
 </body>
 </html>
