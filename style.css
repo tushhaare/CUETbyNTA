@@ -2,8 +2,8 @@
 /* Force header to be visible and fixed properly */
 .header-area {
     background-color: white !important;
-    z-index: 9999;
-    position: relative;
+    z-index: 9999 !important;
+    position: relative !important;
 }
 
 .header-sticky {
