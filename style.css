@@ -133,17 +133,43 @@
 
 @media(max-width:768px){
 
-    .notice-popup-box{
-        flex-direction: column;
+    #cuetNoticeOverlay{
+        padding:14px !important;
+        align-items:flex-end !important;
     }
 
-    .notice-popup-side{
-        width:100%;
-        min-height:180px;
+    #cuetNoticeOverlay > div{
+        flex-direction:column !important;
+        width:100% !important;
+        max-height:90vh !important;
+        overflow-y:auto !important;
+        border-radius:22px 22px 0 0 !important;
     }
 
-    .notice-popup-content{
-        padding:30px 20px;
+    #cuetNoticeOverlay h2{
+        font-size:28px !important;
+        line-height:1.3 !important;
+    }
+
+    #cuetNoticeOverlay p{
+        font-size:15px !important;
+        line-height:1.7 !important;
+    }
+
+    #cuetNoticeOverlay a{
+        font-size:14px !important;
+        padding:14px 15px !important;
+    }
+
+    #cuetNoticeOverlay > div > div:first-child{
+        padding:30px 22px !important;
+    }
+
+    #cuetNoticeOverlay > div > div:nth-child(2){
+        width:100% !important;
+        min-height:160px !important;
+        font-size:22px !important;
+        padding:25px !important;
     }
 
 }
