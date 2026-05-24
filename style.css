@@ -16,226 +16,134 @@
     z-index: 10;
 }
 
-```css
-/* ===================================
-   RECENT NOTICE POPUP
-=================================== */
+/* ===== NOTICE POPUP ===== */
 
 .notice-popup-overlay{
     position: fixed;
-    inset: 0;
-    background: rgba(10, 15, 35, 0.72);
-    backdrop-filter: blur(5px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-    z-index: 999999;
+    background: rgba(0,0,0,0.65);
 
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 
-    padding: 20px;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition: all 0.35s ease;
+    z-index: 999999;
 }
 
 .notice-popup-overlay.active{
-    opacity: 1;
-    visibility: visible;
+    display: flex;
 }
 
 .notice-popup-box{
-    width: 100%;
-    max-width: 900px;
+    width: 92%;
+    max-width: 850px;
 
     background: #fff;
+
     border-radius: 18px;
 
     overflow: hidden;
-    position: relative;
 
     display: flex;
-    align-items: stretch;
 
-    box-shadow:
-    0 20px 60px rgba(0,0,0,0.18);
+    position: relative;
 
-    transform: translateY(30px) scale(0.96);
-    transition: all 0.4s ease;
+    animation: popupShow 0.35s ease;
 }
 
-.notice-popup-overlay.active .notice-popup-box{
-    transform: translateY(0px) scale(1);
+@keyframes popupShow{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
-
-/* LEFT SIDE */
 
 .notice-popup-content{
     flex: 1;
-    padding: 55px;
+    padding: 45px;
 }
-
-.notice-popup-tag{
-    display: inline-block;
-
-    background: rgba(200,111,255,0.12);
-    color: #C86FFF;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    padding: 8px 18px;
-    border-radius: 50px;
-
-    margin-bottom: 22px;
-}
-
-.notice-popup-content h2{
-    font-size: 42px;
-    color: #4255A4;
-    font-weight: 700;
-
-    margin-bottom: 14px;
-}
-
-.notice-popup-content p{
-    color: #6B7280;
-    line-height: 1.8;
-    margin-bottom: 30px;
-}
-
-/* NOTICE LIST */
-
-.notice-popup-list{
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.notice-popup-list a{
-    display: block;
-
-    background: #f8f9ff;
-
-    padding: 16px 18px;
-
-    border-radius: 12px;
-
-    color: #4255A4;
-    font-weight: 600;
-
-    transition: all 0.28s ease;
-
-    border: 1px solid transparent;
-}
-
-.notice-popup-list a:hover{
-    background: #fff;
-    border-color: #C86FFF;
-
-    color: #C86FFF;
-
-    transform: translateX(6px);
-}
-
-/* RIGHT SIDE */
 
 .notice-popup-side{
-    width: 280px;
+    width: 260px;
 
-    background:
-    linear-gradient(
-        160deg,
+    background: linear-gradient(
+        135deg,
         #AE59FF,
         #6D4CFF
     );
 
-    position: relative;
+    color: #fff;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
-}
-
-/* FUTURE POSTER */
-
-.notice-popup-poster-placeholder{
-    color: rgba(255,255,255,0.85);
-
     text-align: center;
 
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.6;
+    padding: 30px;
 }
-
-/* CLOSE BUTTON */
 
 .notice-popup-close{
     position: absolute;
 
-    top: 16px;
-    right: 16px;
+    top: 15px;
+    right: 15px;
 
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
     border: none;
     border-radius: 50%;
 
-    background: #f4f4f4;
+    background: #f3f3f3;
 
-    font-size: 28px;
-    line-height: 1;
-
-    color: #333;
+    font-size: 24px;
 
     cursor: pointer;
-
-    transition: all 0.25s ease;
-
-    z-index: 10;
 }
 
-.notice-popup-close:hover{
-    background: #FF9F67;
-    color: #fff;
+.notice-popup-list a{
+    display:block;
 
-    transform: rotate(90deg);
+    padding:14px 16px;
+
+    background:#f7f8ff;
+
+    margin-bottom:12px;
+
+    border-radius:10px;
+
+    color:#4255A4;
+
+    font-weight:600;
 }
 
-/* BUTTON */
-
-.notice-popup-btn{
-    margin-top: 30px;
+.notice-popup-list a:hover{
+    background:#AE59FF;
+    color:#fff;
 }
 
-/* MOBILE */
-
-@media(max-width: 850px){
+@media(max-width:768px){
 
     .notice-popup-box{
         flex-direction: column;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .notice-popup-content{
-        padding: 35px 25px;
-    }
-
-    .notice-popup-content h2{
-        font-size: 30px;
     }
 
     .notice-popup-side{
-        width: 100%;
-        min-height: 220px;
+        width:100%;
+        min-height:180px;
+    }
+
+    .notice-popup-content{
+        padding:30px 20px;
     }
 
 }
-```
