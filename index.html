@@ -559,68 +559,80 @@
 ========================= -->
 
 <div id="noticePopup" class="notice-popup-overlay">
-  
-  <div class="notice-popup-box">
 
-    <!-- Close Button -->
-    <button class="notice-close-btn" id="closeNoticePopup">
-      &times;
-    </button>
+    <div class="notice-popup-box">
 
-    <!-- Left Content -->
-    <div class="notice-content">
+        <!-- Close Button -->
+        <button class="notice-popup-close" id="closeNoticePopup">
+            &times;
+        </button>
 
-      <div class="notice-badge">
-        Latest Updates
-      </div>
+        <!-- LEFT CONTENT -->
+        <div class="notice-popup-content">
 
-      <h2>Recent Notices</h2>
+            <div class="notice-popup-tag">
+                Latest Updates
+            </div>
 
-      <p class="notice-subtext">
-        Stay updated with the latest announcements, webinars, mock tests, and admission guidance updates from CUETbyNTA.
-      </p>
+            <h2>Recent Notices</h2>
 
-      <ul class="notice-list">
+            <p>
+                Stay updated with the latest announcements, webinars, mock tests, and admission guidance updates from CUETbyNTA.
+            </p>
 
-        <li>
-          <a href="#">
-            DU CSAS Preference Filling Session announced for students
-          </a>
-        </li>
+            <div class="notice-popup-list">
 
-        <li>
-          <a href="#">
-            New FREE CBT Mock Test for Political Science uploaded
-          </a>
-        </li>
+                <a href="#">
+                    DU CSAS Preference Filling Session announced for students
+                </a>
 
-        <li>
-          <a href="#">
-            MARGDARSHAN mentorship registrations now open
-          </a>
-        </li>
+                <a href="#">
+                    New FREE CBT Mock Test for Political Science uploaded
+                </a>
 
-        <li>
-          <a href="#">
-            Important CUET counselling guidance PDF available now
-          </a>
-        </li>
+                <a href="#">
+                    MARGDARSHAN mentorship registrations now open
+                </a>
 
-        <li>
-          <a href="#">
-            Live webinar with DU seniors this Sunday at 7 PM
-          </a>
-        </li>
+                <a href="#">
+                    Important CUET counselling guidance PDF available now
+                </a>
 
-      </ul>
+                <a href="#">
+                    Live webinar with DU seniors this Sunday at 7 PM
+                </a>
 
-      <div class="notice-buttons">
-        <a href="#" class="notice-btn-primary">
-          View All Notices
-        </a>
-      </div>
+            </div>
+
+            <div class="notice-popup-btn">
+                <a href="#" class="btn">
+                    View All Notices
+                </a>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="notice-popup-side">
+
+            <!-- FUTURE POSTER -->
+            <!--
+            <img src="assets/img/notices/poster.jpg" alt="">
+            -->
+
+            <div class="notice-popup-poster-placeholder">
+                Upcoming<br>
+                Announcement<br>
+                Poster
+            </div>
+
+        </div>
 
     </div>
+
+</div>
+
+<!-- POPUP SCRIPT -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
@@ -628,17 +640,17 @@ document.addEventListener("DOMContentLoaded", function(){
     const popup = document.getElementById("noticePopup");
     const closeBtn = document.getElementById("closeNoticePopup");
 
-    // Show popup after short delay
+    // OPEN POPUP
     setTimeout(() => {
         popup.classList.add("active");
     }, 700);
 
-    // Close popup
+    // CLOSE BUTTON
     closeBtn.addEventListener("click", () => {
         popup.classList.remove("active");
     });
 
-    // Close on outside click
+    // OUTSIDE CLICK CLOSE
     popup.addEventListener("click", (e) => {
         if(e.target === popup){
             popup.classList.remove("active");
@@ -647,7 +659,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
-
 
 
 </body>
