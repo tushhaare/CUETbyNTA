@@ -733,10 +733,7 @@ window.addEventListener("load", function () {
             }
         }
 
-        .cuet-popup-left{
-            flex:1;
-            padding:${isMobile ? "28px 18px 24px" : "55px"};
-        }
+        .cuet-popup-left{ flex:1; padding:${isMobile ? "22px 16px 18px" : "55px"}; }
 
         .cuet-popup-badge{
             display:inline-block;
@@ -750,7 +747,7 @@ window.addEventListener("load", function () {
         }
 
         .cuet-popup-title{
-            font-size:${isMobile ? "28px" : "44px"};
+            font-size:${isMobile ? "22px" : "44px"};
             line-height:1.2;
             color:#4255A4;
             font-weight:700;
@@ -785,7 +782,7 @@ window.addEventListener("load", function () {
         }
 
         .cuet-popup-side{
-            width:${isMobile ? "100%" : "280px"};
+            width:${isMobile ? "100%" : "280px"}; display:${isMobile ? "none" : "flex"};
             min-height:${isMobile ? "140px" : "auto"};
             background:linear-gradient(135deg,#AE59FF,#6D4CFF);
             display:flex;
@@ -800,11 +797,7 @@ window.addEventListener("load", function () {
         }
 
         .cuet-close{
-            position:absolute;
-            top:14px;
-            right:14px;
-            width:42px;
-            height:42px;
+            position:absolute; top:12px; right:12px; width:${isMobile ? "38px" : "42px"}; height:${isMobile ? "38px" : "42px"};
             border:none;
             border-radius:50%;
             background:#111827;
