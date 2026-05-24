@@ -554,6 +554,7 @@
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
 
+
 <!-- =========================
      RECENT NOTICES POPUP
 ========================= -->
@@ -562,7 +563,7 @@
 
     <div class="notice-popup-box">
 
-        <!-- Close Button -->
+        <!-- CLOSE BUTTON -->
         <button class="notice-popup-close" id="closeNoticePopup">
             &times;
         </button>
@@ -577,7 +578,8 @@
             <h2>Recent Notices</h2>
 
             <p>
-                Stay updated with the latest announcements, webinars, mock tests, and admission guidance updates from CUETbyNTA.
+                Stay updated with the latest announcements, webinars,
+                mock tests, and admission guidance updates from CUETbyNTA.
             </p>
 
             <div class="notice-popup-list">
@@ -615,9 +617,9 @@
         <!-- RIGHT SIDE -->
         <div class="notice-popup-side">
 
-            <!-- FUTURE POSTER -->
+            <!-- FUTURE POSTER IMAGE -->
             <!--
-            <img src="assets/img/notices/poster.jpg" alt="">
+            <img src="assets/img/poster.jpg" alt="">
             -->
 
             <div class="notice-popup-poster-placeholder">
@@ -635,30 +637,33 @@
 <!-- POPUP SCRIPT -->
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function(){
 
     const popup = document.getElementById("noticePopup");
     const closeBtn = document.getElementById("closeNoticePopup");
 
     // OPEN POPUP
-    setTimeout(() => {
+    setTimeout(function(){
         popup.classList.add("active");
     }, 700);
 
     // CLOSE BUTTON
-    closeBtn.addEventListener("click", () => {
+    closeBtn.addEventListener("click", function(){
         popup.classList.remove("active");
     });
 
-    // OUTSIDE CLICK CLOSE
-    popup.addEventListener("click", (e) => {
+    // OUTSIDE CLICK
+    popup.addEventListener("click", function(e){
         if(e.target === popup){
             popup.classList.remove("active");
         }
     });
 
 });
+
 </script>
+
 
 
 </body>
