@@ -651,214 +651,244 @@ window.addEventListener("load", function(){
 
 window.addEventListener("load", function () {
 
-    // CREATE POPUP
-    const popup = document.createElement("div");
+    // LOCK SCROLL
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.height = "100vh";
 
-    popup.innerHTML = `
+    // CREATE OVERLAY
+    const overlay = document.createElement("div");
 
-    <div id="cuetNoticeOverlay" style="
+    overlay.id = "cuetPopupOverlay";
+
+    overlay.style.cssText = `
         position:fixed;
         inset:0;
-        background:rgba(0,0,0,0.72);
-        z-index:999999999;
+        width:100vw;
+        height:100vh;
+        background:rgba(7,12,28,0.78);
+        backdrop-filter:blur(6px);
+        z-index:9999999999;
         display:flex;
         align-items:center;
         justify-content:center;
         padding:20px;
-        font-family:Arial,sans-serif;
-    ">
+        overflow:hidden;
+    `;
 
-        <div style="
-            width:100%;
-            max-width:900px;
-            background:#ffffff;
-            border-radius:20px;
-            overflow:hidden;
+    // RESPONSIVE CHECK
+    const isMobile = window.innerWidth <= 768;
+
+    // POPUP
+    const popup = document.createElement("div");
+
+    popup.style.cssText = isMobile
+    ? `
+        width:100%;
+        max-height:92vh;
+        overflow-y:auto;
+        background:#fff;
+        border-radius:24px 24px 0 0;
+        position:fixed;
+        bottom:0;
+        left:0;
+        right:0;
+        animation:slideUp .35s ease;
+        font-family:'Mulish',sans-serif;
+    `
+    : `
+        width:100%;
+        max-width:920px;
+        background:#fff;
+        border-radius:24px;
+        overflow:hidden;
+        display:flex;
+        position:relative;
+        box-shadow:0 25px 60px rgba(0,0,0,0.25);
+        animation:popupFade .35s ease;
+        font-family:'Mulish',sans-serif;
+    `;
+
+    popup.innerHTML = `
+
+        <style>
+
+        @keyframes popupFade{
+            from{
+                opacity:0;
+                transform:translateY(25px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        @keyframes slideUp{
+            from{
+                transform:translateY(100%);
+            }
+            to{
+                transform:translateY(0);
+            }
+        }
+
+        .cuet-popup-left{
+            flex:1;
+            padding:${isMobile ? "28px 18px 24px" : "55px"};
+        }
+
+        .cuet-popup-badge{
+            display:inline-block;
+            background:#f3e8ff;
+            color:#AE59FF;
+            padding:8px 16px;
+            border-radius:50px;
+            font-size:13px;
+            font-weight:700;
+            margin-bottom:18px;
+        }
+
+        .cuet-popup-title{
+            font-size:${isMobile ? "28px" : "44px"};
+            line-height:1.2;
+            color:#4255A4;
+            font-weight:700;
+            margin-bottom:14px;
+            font-family:'Josefin Sans',sans-serif;
+        }
+
+        .cuet-popup-text{
+            color:#667085;
+            line-height:1.7;
+            margin-bottom:24px;
+            font-size:${isMobile ? "14px" : "16px"};
+        }
+
+        .cuet-popup-link{
+            display:block;
+            padding:${isMobile ? "14px" : "16px"};
+            background:#f7f8ff;
+            border-radius:12px;
+            margin-bottom:12px;
+            color:#4255A4;
+            text-decoration:none;
+            font-weight:600;
+            transition:.25s;
+            font-size:${isMobile ? "14px" : "15px"};
+        }
+
+        .cuet-popup-link:hover{
+            background:#AE59FF;
+            color:#fff;
+            transform:translateX(5px);
+        }
+
+        .cuet-popup-side{
+            width:${isMobile ? "100%" : "280px"};
+            min-height:${isMobile ? "140px" : "auto"};
+            background:linear-gradient(135deg,#AE59FF,#6D4CFF);
             display:flex;
-            position:relative;
-            box-shadow:0 20px 60px rgba(0,0,0,0.25);
-            animation:popupAnim .35s ease;
-        ">
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            text-align:center;
+            padding:25px;
+            font-weight:700;
+            font-size:${isMobile ? "20px" : "28px"};
+            line-height:1.5;
+        }
 
-            <!-- LEFT -->
-            <div style="
-                flex:1;
-                padding:50px;
-            ">
+        .cuet-close{
+            position:absolute;
+            top:14px;
+            right:14px;
+            width:42px;
+            height:42px;
+            border:none;
+            border-radius:50%;
+            background:#111827;
+            color:#fff;
+            font-size:26px;
+            cursor:pointer;
+            z-index:10;
+        }
 
-                <div style="
-                    display:inline-block;
-                    background:#f3e8ff;
-                    color:#AE59FF;
-                    padding:8px 16px;
-                    border-radius:50px;
-                    font-weight:700;
-                    font-size:14px;
-                    margin-bottom:22px;
-                ">
-                    Latest Updates
-                </div>
+        </style>
 
-                <h2 style="
-                    font-size:42px;
-                    color:#4255A4;
-                    margin-bottom:14px;
-                ">
-                    Recent Notices
-                </h2>
+        <button class="cuet-close" id="cuetCloseBtn">×</button>
 
-                <p style="
-                    color:#667085;
-                    line-height:1.7;
-                    margin-bottom:28px;
-                ">
-                    Stay updated with the latest announcements and updates from CUETbyNTA.
-                </p>
+        ${isMobile ? "" : `<div class="cuet-popup-left">`}
 
-                <div>
+        <div class="cuet-popup-badge">
+            Latest Updates
+        </div>
 
-                    <a href="#" style="
-                        display:block;
-                        padding:15px 18px;
-                        background:#f7f8ff;
-                        border-radius:12px;
-                        margin-bottom:12px;
-                        color:#4255A4;
-                        text-decoration:none;
-                        font-weight:600;
-                    ">
-                        DU CSAS Preference Filling Session announced
-                    </a>
+        <div class="cuet-popup-title">
+            Recent Notices
+        </div>
 
-                    <a href="#" style="
-                        display:block;
-                        padding:15px 18px;
-                        background:#f7f8ff;
-                        border-radius:12px;
-                        margin-bottom:12px;
-                        color:#4255A4;
-                        text-decoration:none;
-                        font-weight:600;
-                    ">
-                        New FREE CBT Mock uploaded
-                    </a>
+        <div class="cuet-popup-text">
+            Stay updated with the latest announcements and important CUET updates from CUETbyNTA.
+        </div>
 
-                    <a href="#" style="
-                        display:block;
-                        padding:15px 18px;
-                        background:#f7f8ff;
-                        border-radius:12px;
-                        margin-bottom:12px;
-                        color:#4255A4;
-                        text-decoration:none;
-                        font-weight:600;
-                    ">
-                        MARGDARSHAN registrations open
-                    </a>
+        <a href="#" class="cuet-popup-link">
+            DU CSAS Preference Filling Session announced
+        </a>
 
-                    <a href="#" style="
-                        display:block;
-                        padding:15px 18px;
-                        background:#f7f8ff;
-                        border-radius:12px;
-                        margin-bottom:12px;
-                        color:#4255A4;
-                        text-decoration:none;
-                        font-weight:600;
-                    ">
-                        Important counselling PDF available
-                    </a>
+        <a href="#" class="cuet-popup-link">
+            New FREE CBT Mock uploaded
+        </a>
 
-                </div>
+        <a href="#" class="cuet-popup-link">
+            MARGDARSHAN registrations open
+        </a>
 
+        <a href="#" class="cuet-popup-link">
+            Important counselling PDF available
+        </a>
+
+        <a href="#" class="cuet-popup-link">
+            Live webinar this Sunday
+        </a>
+
+        ${isMobile ? `
+            <div class="cuet-popup-side">
+                Upcoming Poster Area
+            </div>
+        `
+        :
+        `
             </div>
 
-            <!-- RIGHT -->
-            <div style="
-                width:280px;
-                background:linear-gradient(135deg,#AE59FF,#6D4CFF);
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                color:#fff;
-                text-align:center;
-                padding:30px;
-                font-weight:700;
-                font-size:26px;
-                line-height:1.5;
-            ">
-
+            <div class="cuet-popup-side">
                 Upcoming<br>
                 Poster<br>
                 Area
-
             </div>
-
-            <!-- CLOSE -->
-            <button id="closeCuetPopup" style="
-                position:absolute;
-                top:15px;
-                right:15px;
-                width:42px;
-                height:42px;
-                border:none;
-                border-radius:50%;
-                background:#1f2937; color:#ffffff; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:0.25s ease;
-                cursor:pointer;
-                font-size:24px;
-            ">
-                ×
-            </button>
-
-        </div>
-
-    </div>
-
-    <style>
-
-    @keyframes popupAnim{
-        from{
-            opacity:0;
-            transform:translateY(25px);
+        `
         }
-        to{
-            opacity:1;
-            transform:translateY(0);
-        }
-    }
-
-    @media(max-width:768px){
-
-        #cuetNoticeOverlay > div{
-            flex-direction:column !important;
-        }
-
-        #cuetNoticeOverlay h2{
-            font-size:30px !important;
-        }
-
-    }
-
-    </style>
 
     `;
 
-    document.body.appendChild(popup);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
 
     // CLOSE
     document
-        .getElementById("closeCuetPopup")
-        .onclick = function () {
+        .getElementById("cuetCloseBtn")
+        .onclick = function(){
 
-        document
-            .getElementById("cuetNoticeOverlay")
-            .remove();
+        overlay.remove();
+
+        document.documentElement.style.overflow = "auto";
+        document.body.style.overflow = "auto";
+        document.body.style.height = "auto";
     };
 
 });
 
 </script>
-
 
 </body>
 </html>
