@@ -647,5 +647,218 @@ window.addEventListener("load", function(){
 
 </script>
 
+<script>
+
+window.addEventListener("load", function () {
+
+    // CREATE POPUP
+    const popup = document.createElement("div");
+
+    popup.innerHTML = `
+
+    <div id="cuetNoticeOverlay" style="
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.72);
+        z-index:999999999;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+        font-family:Arial,sans-serif;
+    ">
+
+        <div style="
+            width:100%;
+            max-width:900px;
+            background:#ffffff;
+            border-radius:20px;
+            overflow:hidden;
+            display:flex;
+            position:relative;
+            box-shadow:0 20px 60px rgba(0,0,0,0.25);
+            animation:popupAnim .35s ease;
+        ">
+
+            <!-- LEFT -->
+            <div style="
+                flex:1;
+                padding:50px;
+            ">
+
+                <div style="
+                    display:inline-block;
+                    background:#f3e8ff;
+                    color:#AE59FF;
+                    padding:8px 16px;
+                    border-radius:50px;
+                    font-weight:700;
+                    font-size:14px;
+                    margin-bottom:22px;
+                ">
+                    Latest Updates
+                </div>
+
+                <h2 style="
+                    font-size:42px;
+                    color:#4255A4;
+                    margin-bottom:14px;
+                ">
+                    Recent Notices
+                </h2>
+
+                <p style="
+                    color:#667085;
+                    line-height:1.7;
+                    margin-bottom:28px;
+                ">
+                    Stay updated with the latest announcements and updates from CUETbyNTA.
+                </p>
+
+                <div>
+
+                    <a href="#" style="
+                        display:block;
+                        padding:15px 18px;
+                        background:#f7f8ff;
+                        border-radius:12px;
+                        margin-bottom:12px;
+                        color:#4255A4;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">
+                        DU CSAS Preference Filling Session announced
+                    </a>
+
+                    <a href="#" style="
+                        display:block;
+                        padding:15px 18px;
+                        background:#f7f8ff;
+                        border-radius:12px;
+                        margin-bottom:12px;
+                        color:#4255A4;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">
+                        New FREE CBT Mock uploaded
+                    </a>
+
+                    <a href="#" style="
+                        display:block;
+                        padding:15px 18px;
+                        background:#f7f8ff;
+                        border-radius:12px;
+                        margin-bottom:12px;
+                        color:#4255A4;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">
+                        MARGDARSHAN registrations open
+                    </a>
+
+                    <a href="#" style="
+                        display:block;
+                        padding:15px 18px;
+                        background:#f7f8ff;
+                        border-radius:12px;
+                        margin-bottom:12px;
+                        color:#4255A4;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">
+                        Important counselling PDF available
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div style="
+                width:280px;
+                background:linear-gradient(135deg,#AE59FF,#6D4CFF);
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:#fff;
+                text-align:center;
+                padding:30px;
+                font-weight:700;
+                font-size:26px;
+                line-height:1.5;
+            ">
+
+                Upcoming<br>
+                Poster<br>
+                Area
+
+            </div>
+
+            <!-- CLOSE -->
+            <button id="closeCuetPopup" style="
+                position:absolute;
+                top:15px;
+                right:15px;
+                width:42px;
+                height:42px;
+                border:none;
+                border-radius:50%;
+                background:#f3f3f3;
+                cursor:pointer;
+                font-size:24px;
+            ">
+                ×
+            </button>
+
+        </div>
+
+    </div>
+
+    <style>
+
+    @keyframes popupAnim{
+        from{
+            opacity:0;
+            transform:translateY(25px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+    @media(max-width:768px){
+
+        #cuetNoticeOverlay > div{
+            flex-direction:column !important;
+        }
+
+        #cuetNoticeOverlay h2{
+            font-size:30px !important;
+        }
+
+    }
+
+    </style>
+
+    `;
+
+    document.body.appendChild(popup);
+
+    // CLOSE
+    document
+        .getElementById("closeCuetPopup")
+        .onclick = function () {
+
+        document
+            .getElementById("cuetNoticeOverlay")
+            .remove();
+    };
+
+});
+
+</script>
+
+
 </body>
 </html>
