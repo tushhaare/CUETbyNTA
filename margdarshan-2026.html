@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="icon" href="marg26/logo.png" type="image/png">
+
+<title>MARGDARSHAN 2026 | DU Admissions Mentorship Program</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#f8fafc;
+color:#1e293b;
+overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+
+background:rgba(255,255,255,.85);
+backdrop-filter:blur(24px);
+
+box-shadow:
+0 8px 30px rgba(0,0,0,.05);
+
+transition:.3s;
+}
+
+
+.navbar{
+max-width:1300px;
+margin:auto;
+padding:14px 32px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:30px;
+}
+
+.nav-menu{
+display:flex;
+align-items:center;
+gap:40px;
+margin-left:auto;
+}
+
+.nav-menu a{
+position:relative;
+text-decoration:none;
+font-weight:600;
+color:#475569;
+padding:10px 4px;
+transition:.3s;
+}
+
+.nav-menu.active{
+border-top:1px solid #eee;
+}
+
+.nav-menu a::after{
+
+content:"";
+
+position:absolute;
+
+bottom:-4px;
+
+left:0;
+
+width:0;
+
+height:2px;
+
+background:#AE59FF;
+
+transition:.3s;
+
+}
+
+.nav-menu a:hover{
+color:#AE59FF;
+}
+
+.nav-menu a:hover::after{
+width:100%;
+}
+
+
+.hamburger{
+
+display:none;
+
+background:none;
+
+border:none;
+
+font-size:24px;
+
+cursor:pointer;
+
+color:#334155;
+
+}
+
+@media(max-width:768px){
+
+.nav-menu{
+display:none;
+}
+
+.hamburger{
+display:block;
+}
+
+.nav-menu.active{
+display:flex;
+position:absolute;
+top:100%;
+left:0;
+width:100%;
+background:white;
+flex-direction:column;
+padding:25px;
+gap:20px;
+border-top:1px solid #eee;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+z-index:999;
+}
+
+.nav-menu.active a{
+padding:10px 0;
+}
+
+}
+
+.logo{
+font-size:24px;
+font-weight:800;
+color:#AE59FF;
+text-decoration:none;
+}
+
+.nav-btn,
+.card-btn,
+.cta-btn-primary{
+
+background:linear-gradient(
+135deg,
+#AE59FF,
+#6D4CFF
+);
+
+color:white;
+
+box-shadow:
+0 0 15px rgba(174,89,255,.4),
+0 0 35px rgba(174,89,255,.25);
+
+animation:glow 2s infinite;
+
+}
+
+@keyframes glow{
+
+0%{
+box-shadow:
+0 0 15px rgba(174,89,255,.4),
+0 0 35px rgba(174,89,255,.25);
+}
+
+50%{
+box-shadow:
+0 0 25px rgba(174,89,255,.7),
+0 0 60px rgba(174,89,255,.4);
+}
+
+100%{
+box-shadow:
+0 0 15px rgba(174,89,255,.4),
+0 0 35px rgba(174,89,255,.25);
+}
+
+}
+
+.topbar{
+    background:#111827;
+    color:white;
+    overflow:hidden;
+    white-space:nowrap;
+    height:42px;
+    display:flex;
+    align-items:center;
+    font-weight:600;
+    position:relative;
+}
+
+.topbar-track{
+    display:inline-flex;
+    gap:30px;
+    align-items:center;
+    padding-left:100%;
+    animation:marquee 35s linear infinite;
+}
+
+.topbar:hover .topbar-track{
+    animation-play-state:paused;
+}
+
+@keyframes marquee{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-100%);
+    }
+
+}
+
+.nav-menu.active{
+animation:slideDown .25s ease;
+}
+
+@keyframes slideDown{
+
+from{
+opacity:0;
+transform:translateY(-10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* HERO */
+
+
+.hero{
+padding-top:180px;
+padding-bottom:90px;
+background:
+linear-gradient(135deg,#AE59FF 0%,#6D4CFF 100%);
+position:relative;
+overflow:hidden;
+min-height:90vh;
+display:flex;
+align-items:center;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:700px;
+height:700px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+top:-300px;
+right:-200px;
+}
+
+.hero-container{
+max-width:1300px;
+margin:auto;
+padding:0 20px;
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:40px;
+align-items:center;
+}
+
+.badge{
+display:inline-block;
+padding:10px 18px;
+background:rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.2);
+backdrop-filter:blur(10px);
+border-radius:999px;
+color:white;
+font-weight:600;
+margin-bottom:20px;
+}
+
+.hero h1{
+font-size:64px;
+line-height:1.05;
+color:white;
+font-weight:800;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:18px;
+color:white;
+opacity:.95;
+max-width:700px;
+line-height:1.8;
+}
+
+.price-box{
+margin-top:30px;
+display:flex;
+align-items:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.old-price{
+font-size:30px;
+text-decoration:line-through;
+color:#ddd;
+}
+
+.new-price{
+font-size:52px;
+font-weight:800;
+color:#fff;
+}
+
+.discount{
+background:#16a34a;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-weight:600;
+}
+
+.hero-buttons{
+margin-top:35px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn-primary{
+background:white;
+color:#6D4CFF;
+padding:16px 28px;
+border-radius:14px;
+text-decoration:none;
+font-weight:700;
+}
+
+.btn-secondary{
+border:2px solid white;
+color:white;
+padding:16px 28px;
+border-radius:14px;
+text-decoration:none;
+font-weight:700;
+}
+
+/* CARD */
+
+.hero-card{
+background:white;
+border-radius:25px;
+padding:25px;
+box-shadow:0 30px 60px rgba(0,0,0,.15);
+}
+
+.poster{
+width:100%;
+aspect-ratio:1/1;
+background:#f2f2f2;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+font-weight:600;
+color:#777;
+}
+
+.hero-card h3{
+margin-top:20px;
+font-size:24px;
+}
+
+.hero-card ul{
+margin-top:15px;
+padding-left:18px;
+}
+
+.hero-card li{
+margin-bottom:10px;
+}
+
+.card-btn{
+display:block;
+text-align:center;
+margin-top:20px;
+background:#AE59FF;
+color:white;
+padding:16px;
+border-radius:14px;
+text-decoration:none;
+font-weight:700;
+}
+
+/* STATS */
+
+.stats{
+margin-top:-45px;
+position:relative;
+z-index:10;
+}
+
+.stats-wrap{
+max-width:1200px;
+margin:auto;
+background:white;
+border-radius:22px;
+padding:25px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+box-shadow:0 10px 40px rgba(0,0,0,.08);
+}
+
+.stat{
+text-align:center;
+}
+
+.stat h3{
+font-size:32px;
+color:#AE59FF;
+margin-bottom:5px;
+}
+
+.stat p{
+color:#64748b;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero-container{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.stats-wrap{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.hero{
+padding-top:150px;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+.new-price{
+font-size:42px;
+}
+
+.stats-wrap{
+grid-template-columns:1fr;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+.btn-primary,
+.btn-secondary{
+text-align:center;
+width:100%;
+}
+
+}
+
+.logo img{
+height:48px;
+display:block;
+}
+@media(max-width:768px){
+
+.logo img{
+height:40px;
+}
+
+}
+.hero-subtitle{
+color:white;
+font-size:28px;
+font-weight:700;
+margin-bottom:20px;
+opacity:.95;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+    <div class="topbar">
+    <div class="topbar-track">
+
+        <!-- Duplicate for seamless loop -->
+
+        <span>🎉 20% Off Till 5 July 2026</span>
+
+        <span>•</span>
+
+        <span>🚀 Limited Seats Available</span>
+
+        <span>•</span>
+
+        <span>🎓 Delhi University Admissions 2026</span>
+
+        <span>•</span>
+
+        <span>🔥 Register Today For Just ₹199</span>
+
+<span>•</span>
+
+<span>🎉 20% Off Till 5 July 2026</span>
+
+        <span>•</span>
+
+        <span>🚀 Limited Seats Available</span>
+
+        <span>•</span>
+
+        <span>🎓 Delhi University Admissions 2026</span>
+
+        <span>•</span>
+
+        <span>🔥 Register Today For Just ₹199</span>
+
+        <span>•</span>
+
+        <span>🎉 20% Off Till 5 July 2026</span>
+
+        <span>•</span>
+
+        <span>🚀 Limited Seats Available</span>
+
+        <span>•</span>
+
+        <span>🎓 Delhi University Admissions 2026</span>
+
+        <span>•</span>
+
+        <span>🔥 Register Today For Just ₹199</span>
+
+    </div>
+</div>
+
+<div class="navbar">
+
+    <a href="#" class="logo">
+        <img src="marg26/logob.png" alt="CUETbyNTA">
+    </a>
+
+    <nav class="nav-menu">
+
+        <a href="#features">Features</a>
+
+        <a href="#mentors">Mentors</a>
+
+        <a href="#testimonials">Success Stories</a>
+
+        <a href="#faq">FAQ</a>
+
+    </nav>
+
+    <button class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+    </button>
+
+</div>
+</header>
+
+<section class="hero">
+
+<div class="hero-container">
+
+<div>
+
+<div class="badge">
+🎓 Delhi University Admissions 2026
+</div>
+
+<h1>
+Delhi University Admissions Made Simple
+</h1>
+
+<h2 class="hero-subtitle">
+MARGDARSHAN 2026
+</h2>
+
+<p>
+Your complete DU admission support system.
+From CUET results to final seat allocation, get one-on-one mentorship, preference sheet guidance, webinars, strategy sessions and unlimited support from experienced DU students.
+</p>
+
+<div class="price-box">
+
+<span class="old-price">₹249</span>
+
+<span class="new-price">₹199</span>
+
+<span class="discount">
+20% Off Till 5 July 2026
+</span>
+
+</div>
+
+<div class="hero-buttons">
+
+<a href="https://margdarshan-erp-2026.web.app/register"
+class="btn-primary">
+Register Now
+</a>
+
+<a href="https://cuetbynta.pages.dev/MARGDARSHAN.pdf"
+class="btn-secondary">
+Download Brochure
+</a>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="hero-card">
+
+<img src="marg26/poster.png" class="poster-img">
+
+<h3>MARGDARSHAN 2026</h3>
+
+<ul>
+<li>1:1 Personal Mentorship</li>
+<li>Preference Sheet Assistance</li>
+<li>CSAS Phase 1, 2 & 3 Support</li>
+<li>Webinars & Live Sessions</li>
+<li>WhatsApp Doubt Support</li>
+<li>Till Admission Completion</li>
+</ul>
+
+<a href="https://margdarshan-erp-2026.web.app/register"
+class="card-btn">
+TAP HERE & GRAB EARLY BIRD OFFER NOW!
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stats-wrap">
+
+<div class="stat">
+<h3>15000+</h3>
+<p>Students Guided</p>
+</div>
+
+<div class="stat">
+<h3>20+</h3>
+<p>Dedicated Mentors</p>
+</div>
+
+<div class="stat">
+<h3>1:1</h3>
+<p>Mentorship</p>
+</div>
+
+<div class="stat">
+<h3>Extensive</h3>
+<p>Support</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="features" class="features-section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>WHY MARGDARSHAN?</span>
+
+<h2>
+Everything You Need For DU Admissions 2026
+</h2>
+
+<p>
+No random advice. No confusion. Get structured guidance from experienced DU students who have already gone through the same process.
+</p>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+<div class="icon">🎯</div>
+<h3>Preference Sheet Guidance</h3>
+<p>Get personalized preference sheet recommendations based on your score, category and goals.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon">🏛️</div>
+<h3>College Selection Support</h3>
+<p>Understand which colleges and courses fit your profile before making critical decisions.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon">📊</div>
+<h3>Rank & Score Analysis</h3>
+<p>Analyze your CUET performance and build a realistic admission strategy.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon">📝</div>
+<h3>CSAS Support</h3>
+<p>Step-by-step guidance through Phase 1, Phase 2 and Phase 3 of CSAS.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon">📞</div>
+<h3>1:1 Mentorship</h3>
+<p>Direct access to your assigned mentor for personalized support.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon">🚀</div>
+<h3>Priority Updates</h3>
+<p>Stay informed with important admission notices, deadlines and updates.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon">💬</div>
+<h3>Unlimited Doubts</h3>
+<p>Ask admission related doubts anytime through WhatsApp support.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon">🎥</div>
+<h3>Webinars & Sessions</h3>
+<p>Attend strategy sessions and admission guidance webinars.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.poster-img{
+width:100%;
+border-radius:18px;
+display:block;
+}
+
+.features-section{
+padding:90px 20px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+.section-heading{
+text-align:center;
+max-width:750px;
+margin:auto;
+margin-bottom:60px;
+}
+
+.section-heading span{
+display:inline-block;
+padding:10px 18px;
+background:#f3e8ff;
+color:#AE59FF;
+border-radius:999px;
+font-weight:600;
+margin-bottom:20px;
+}
+
+.section-heading h2{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.section-heading p{
+color:#64748b;
+line-height:1.8;
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.feature-card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+transition:.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-8px);
+}
+
+.icon{
+font-size:40px;
+margin-bottom:15px;
+}
+
+.feature-card h3{
+margin-bottom:10px;
+font-size:20px;
+}
+
+.feature-card p{
+color:#64748b;
+line-height:1.7;
+}
+
+@media(max-width:1000px){
+
+.feature-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.section-heading h2{
+font-size:32px;
+}
+
+.feature-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+<section id="mentors" class="mentor-section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span>OUR TEAM</span>
+
+<h2>
+Meet Your Mentors
+</h2>
+
+<p>
+A dedicated team of DU students from top colleges, helping you navigate every step of the admission process.
+</p>
+
+</div>
+
+
+<div class="mentor-grid">
+
+<div class="mentor-card">
+<img src="marg26/Archi.jpg">
+<h3>Archi Bajaj</h3>
+<p>B.A. (Hons.) Political Science</p>
+<span>Dyal Singh College (E)</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/Ashish.jpg">
+<h3>Ashish Kumar</h3>
+<p>B.Com. (Hons.)</p>
+<span>Ramjas College</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/Gauri.jpg">
+<h3>Gauri Sapra</h3>
+<p>B.A. (Hons.) Psychology</p>
+<span>Mata Sundri College (W)</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/Jiya.jpg">
+<h3>Jiya Shrivastav</h3>
+<p>B.A. (Hons.) Political Science</p>
+<span>Shaheed Bhagat Singh College</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/Khushali.jpg">
+<h3>Khushali Solanki</h3>
+<p>B.A. (Hons.) Political Science</p>
+<span>Miranda House (W)</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/Meenakshi.jpg">
+<h3>Meenakshi Goswami</h3>
+<p>B.A. (Hons.) Sociology</p>
+<span>Lady Shri Ram College (W)</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/PrinceK.jpg">
+<h3>Prince Kumar</h3>
+<p>B.Com. (Prog.)</p>
+<span>Dyal Singh College (E)</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/PrinceP.jpg">
+<h3>Prince Patel</h3>
+<p>B.A. (Hons.) Sociology</p>
+<span>Hindu College</span>
+</div>
+
+<div class="mentor-card">
+<img src="marg26/Purvi.jpg">
+<h3>Purvi Agrawal</h3>
+<p>B.Com. (Hons.)</p>
+<span>Sri Guru Gobind Singh
+College Of Commerce</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.mentor-section{
+padding:100px 20px;
+background:#ffffff;
+}
+
+.mentor-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.mentor-card{
+background:white;
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 12px 30px rgba(0,0,0,.06);
+transition:.3s;
+text-align:center;
+}
+
+.mentor-card:hover{
+transform:translateY(-8px);
+}
+
+.mentor-card img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+background:#f1f5f9;
+}
+
+.mentor-card h3{
+margin-top:20px;
+font-size:22px;
+}
+
+.mentor-card p{
+margin-top:8px;
+font-weight:600;
+color:#AE59FF;
+}
+
+.mentor-card span{
+display:block;
+padding-bottom:22px;
+margin-top:8px;
+color:#64748b;
+}
+
+@media(max-width:900px){
+
+.mentor-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.mentor-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+<section id="testimonials" class="journey-section">
+
+<div class="container">
+
+<div class="section-heading">
+<span>SUCCESS STORIES</span>
+<h2>Students Who Trusted MARGDARSHAN</h2>
+<p>
+Real students. Real admissions. Real outcomes.
+</p>
+</div>
+
+<div class="testimonial-grid">
+
+<div class="testimonial-card">
+<div class="stars">★★★★★</div>
+<p>
+All seniors helped me so much from doubt solving to addmission process.....it gave me environment to study with other students share our subject doubt knowing theirs....... margdarshan batch truly helped me alot thankuuuuuuuuuuu komal diii❤️🫶 I think I am in Miranda because of all your guidance....🫶
+</p>
+<h4>Akriti Patel</h4>
+<span>Miranda House (W)</span>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">★★★★★</div>
+<p>CUETbyNTA helped me a lot throughout my
+cuet journey from the beginning itself tillthe
+very end,provided me with all the essential
+study materials,guidance & everything else
+required to ace the exam I am grateful to the
+entire team of CUETbyNTA for helping me
+throughout it wouldn't have been possible
+without you.
+</p>
+<h4>Sneha Updadhyay</h4>
+<span>Kamala Nehru College (W)</span>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">★★★★★</div>
+<p>
+Huge thanks to tushar bhaiya and team for
+their efforts. They provided literal one-on-one
+mentorship and immediate replies at any time
+whenever we had any doubts related to any
+process of the admission. You guys please
+trust Tushar bhaiya and sabka admission ho
+jayega achhe college Mai.
+</p>
+<h4>Rishabh Mangal</h4>
+<span>Shaheed Bhagat Singh College</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.testimonial-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.testimonial-card{
+background:white;
+padding:30px;
+border-radius:24px;
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.stars{
+font-size:22px;
+margin-bottom:15px;
+color:#f59e0b;
+}
+
+.testimonial-card p{
+line-height:1.8;
+color:#475569;
+margin-bottom:20px;
+}
+
+.testimonial-card h4{
+margin-bottom:5px;
+}
+
+.testimonial-card span{
+color:#64748b;
+}
+
+.roadmap-section{
+padding:100px 20px;
+background:white;
+}
+
+.timeline{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:50px;
+}
+
+.timeline-item{
+text-align:center;
+padding:30px;
+border-radius:24px;
+background:#f8fafc;
+}
+
+.timeline-number{
+width:60px;
+height:60px;
+border-radius:50%;
+background:#AE59FF;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:auto;
+margin-bottom:20px;
+font-weight:700;
+font-size:22px;
+}
+
+.timeline-item h3{
+margin-bottom:10px;
+}
+
+.timeline-item p{
+color:#64748b;
+}
+
+@media(max-width:900px){
+
+.testimonial-grid{
+grid-template-columns:1fr;
+}
+
+.timeline{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.timeline{
+grid-template-columns:1fr;
+}
+
+}
+
+.college-showcase{
+padding:90px 0;
+background:#fff;
+overflow:hidden;
+}
+
+.college-slider::before,
+.college-slider::after{
+content:"";
+position:absolute;
+top:0;
+width:120px;
+height:100%;
+z-index:10;
+pointer-events:none;
+}
+
+.college-slider::before{
+left:0;
+background:linear-gradient(
+to right,
+#fff,
+transparent
+);
+}
+
+.college-slider::after{
+right:0;
+background:linear-gradient(
+to left,
+#fff,
+transparent
+);
+}
+
+.college-slider{
+margin-top:50px;
+overflow:hidden;
+position:relative;
+}
+
+.college-track{
+display:flex;
+align-items:center;
+gap:60px;
+width:max-content;
+padding:15px 0;
+}
+
+.college-track img{
+height:95px;
+width:auto;
+object-fit:contain;
+filter:grayscale(100%);
+opacity:.75;
+transition:.35s;
+}
+
+.college-track img:hover{
+filter:none;
+opacity:1;
+transform:scale(1.08);
+}
+
+.track-one{
+animation:scrollLeft 38s linear infinite;
+}
+
+.track-two{
+animation:scrollRight 42s linear infinite;
+}
+
+@keyframes scrollLeft{
+from{
+transform:translateX(0);
+}
+to{
+transform:translateX(-50%);
+}
+}
+
+@keyframes scrollRight{
+from{
+transform:translateX(-50%);
+}
+to{
+transform:translateX(0);
+}
+}
+
+.college-slider:hover .college-track{
+animation-play-state:paused;
+}
+
+@media(max-width:768px){
+
+.college-track{
+gap:35px;
+}
+
+.college-track img{
+height:70px;
+}
+
+}
+
+.college-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:35px;
+align-items:center;
+margin-top:50px;
+}
+
+.college-grid img{
+height:80px;
+max-width:100%;
+object-fit:contain;
+margin:auto;
+
+filter:grayscale(100%);
+opacity:.75;
+
+transition:all .3s ease;
+}
+
+.college-grid img:hover{
+filter:none;
+opacity:1;
+transform:translateY(-5px);
+}
+
+@media(max-width:900px){
+
+.college-grid{
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.college-grid img{
+height:65px;
+}
+
+}
+
+@media(max-width:600px){
+
+.college-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.college-grid img{
+height:55px;
+}
+
+}
+
+
+</style>
+
+<section class="college-showcase">
+
+<div class="container">
+
+<div class="section-heading">
+<span>OUR RESULTS</span>
+
+<h2>Students Mentored By Us Are Now Studying At</h2>
+
+<p>
+Top colleges across Delhi University where our students have secured admissions.
+</p>
+
+</div>
+
+<div class="college-slider">
+
+<div class="college-track track-one">
+
+<a href="https://www.srcc.edu" target="_blank" rel="noopener">
+    <img src="marg26/colleges/srcc.png" alt="SRCC">
+</a>
+<a href="https://www.hinducollege.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/hindu.png" alt="Hindu College">
+</a>
+<a href="https://www.mirandahouse.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/miranda.png" alt="Miranda House">
+</a>
+<a href="https://www.lsr.edu.in" target="_blank" rel="noopener">
+    <img src="marg26/colleges/lsr.png" alt="LSR">
+</a>
+<a href="https://sscbs.du.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/sscbs.jpg" alt="SSCBS">
+</a>
+
+<a href="https://ipcollege.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/ipcw.jpg" alt="IPCW">
+</a>
+<a href="https://www.hansrajcollege.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/hansraj.png" alt="Hansraj College">
+</a>
+<a href="https://www.dr.du.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/drc.png" alt="DRC">
+</a>
+<a href="https://sgtbkhalsadu.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/sgtb.jpg" alt="SGTB">
+</a>
+<a href="https://aryabhattacollege.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/abc.jpg" alt="Aryabhatta College">
+</a>
+
+</div>
+
+<div class="college-track track-two">
+
+<a href="https://www.dsc.du.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/dsc.png" alt="DSC">
+</a>
+<a href="https://kmc.du.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/kmc.jpg" alt="KMC">
+</a>
+<a href="https://www.sggscc.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/sggs.jpg" alt="SGGS">
+</a>
+<a href="https://ihe.du.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/ihe.png" alt="IHE">
+</a>
+<a href="https://knc.du.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/knc.jpg" alt="knc">
+</a>
+
+<a href="https://ramjas.du.ac.in/college/web/index.php" target="_blank" rel="noopener">
+    <img src="marg26/colleges/ramjas.jpg" alt="Ramjas College">
+</a>
+<a href="https://rlacollege.edu.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/rla.png" alt="RLA">
+</a>
+<a href="https://www.svc.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/svc.jpg" alt="Venky">
+</a>
+<a href="https://sbs.du.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/sbsc.png" alt="SBSC">
+</a>
+<a href="https://arsdcollege.ac.in/" target="_blank" rel="noopener">
+    <img src="marg26/colleges/arsd.jpg" alt="ARSD">
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="faq" class="faq-section">
+
+<div class="container">
+
+<div class="section-heading">
+<span>FAQ</span>
+<h2>Frequently Asked Questions</h2>
+<p>
+Everything you need to know before joining MARGDARSHAN 2026.
+</p>
+</div>
+
+<div class="faq-container">
+
+<div class="faq-item">
+<button class="faq-question">
+What is MARGDARSHAN 2026?
+<span>+</span>
+</button>
+<div class="faq-answer">
+MARGDARSHAN is a one-on-one mentorship program by CUETbyNTA that helps students navigate Delhi University admissions from CUET result declaration till final seat allocation.
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+Will I get a personal mentor?
+<span>+</span>
+</button>
+<div class="faq-answer">
+Yes. Every student is assigned a mentor based on their stream, interests and admission goals.
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+How long does support continue?
+<span>+</span>
+</button>
+<div class="faq-answer">
+Support continues till your admission process is completed and your seat is secured.
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+Can I ask unlimited doubts?
+<span>+</span>
+</button>
+<div class="faq-answer">
+Absolutely. You can ask admission-related doubts throughout the mentorship period.
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+Do you guarantee admission?
+<span>+</span>
+</button>
+<div class="faq-answer">
+No. Admissions depend on CUET score, category, course demand and university policies. We provide guidance, not guarantees.
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+Is the fee refundable?
+<span>+</span>
+</button>
+<div class="faq-answer">
+No. Due to limited mentor allocation and operational costs, the registration fee is non-refundable.
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="cta-section">
+
+<div class="container">
+
+<div class="cta-box">
+
+<h2>
+Ready For Delhi University Admissions 2026?
+</h2>
+
+<p>
+Join hundreds of students getting personalized admission guidance through MARGDARSHAN.
+</p>
+
+<div class="cta-price">
+
+<span class="old">₹249</span>
+
+<span class="new">₹199</span>
+
+</div>
+
+<div class="cta-deadline">
+20% Scholarship Till 5 July 2026
+</div>
+
+<div class="cta-buttons">
+
+<a href="https://margdarshan-erp-2026.web.app/register" class="cta-btn-primary">
+Register Now
+</a>
+
+<a href="https://cuetbynta.pages.dev/MARGDARSHAN.pdf" class="cta-btn-secondary">
+Download Brochure
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<a href="https://margdarshan-erp-2026.web.app/register"
+class="floating-register">
+Register Now
+</a>
+
+
+<footer>
+
+<div class="container">
+
+<img src="marg26/logo.png" alt="MARGDARSHAN Logo" style="height:70px; margin-bottom:15px;">
+
+<p>
+MARGDARSHAN 2026 • Delhi University Admission Mentorship Program
+</p>
+
+<p class="footer-small">
+© 2026 CUETbyNTA. All Rights Reserved.
+</p>
+
+</div>
+
+<div class="footer-social">
+
+<a href="https://www.instagram.com/CUETbyNTA/"><i class="fab fa-instagram"></i></a>
+
+<a href="https://www.whatsapp.com/channel/0029Va9z74P4tRs1l21nE62F"><i class="fab fa-whatsapp"></i></a>
+
+<a href="mailto:cuetbynta@yahoo.com"><i class="fas fa-envelope"></i></a>
+
+<a href="https://www.linkedin.com/company/cuetbynta/"><i class="fab fa-linkedin"></i></a>
+
+<a href="https://www.t.me/CUET2026UG/"><i class="fab fa-telegram"></i></a>
+
+</div>
+
+</footer>
+
+
+<style>
+
+.footer-social{
+
+margin-top:25px;
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+}
+
+.footer-social a{
+
+width:50px;
+height:50px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+background:#1f2937;
+
+border-radius:50%;
+
+color:white;
+
+font-size:20px;
+
+transition:.3s;
+
+}
+
+.footer-social a:hover{
+
+background:#AE59FF;
+
+transform:translateY(-5px);
+
+}
+
+.floating-register{
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+box-shadow:0 0 0 0 rgba(174,89,255,.5);
+}
+
+70%{
+box-shadow:0 0 0 18px rgba(174,89,255,0);
+}
+
+100%{
+box-shadow:0 0 0 0 rgba(174,89,255,0);
+}
+
+}
+
+.faq-section{
+padding:100px 20px;
+background:#f8fafc;
+}
+
+.faq-container{
+max-width:900px;
+margin:auto;
+}
+
+.faq-item{
+background:white;
+margin-bottom:15px;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.05);
+}
+
+.faq-question{
+width:100%;
+padding:22px;
+background:white;
+border:none;
+cursor:pointer;
+font-size:18px;
+font-weight:600;
+display:flex;
+justify-content:space-between;
+align-items:center;
+text-align:left;
+}
+
+.faq-answer{
+display:none;
+padding:0 22px 22px;
+color:#64748b;
+line-height:1.8;
+}
+
+.faq-item.active .faq-answer{
+display:block;
+}
+
+.cta-section{
+padding:100px 20px;
+background:linear-gradient(135deg,#AE59FF,#6D4CFF);
+}
+
+.cta-box{
+max-width:900px;
+margin:auto;
+text-align:center;
+color:white;
+}
+
+.cta-box h2{
+font-size:48px;
+margin-bottom:20px;
+}
+
+.cta-box p{
+font-size:18px;
+opacity:.95;
+margin-bottom:25px;
+}
+
+.cta-price{
+margin-bottom:15px;
+}
+
+.cta-price .old{
+font-size:32px;
+text-decoration:line-through;
+opacity:.7;
+margin-right:10px;
+}
+
+.cta-price .new{
+font-size:60px;
+font-weight:800;
+}
+
+.cta-deadline{
+display:inline-block;
+background:#16a34a;
+padding:10px 18px;
+border-radius:999px;
+font-weight:600;
+margin-bottom:30px;
+}
+
+.cta-buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.cta-btn-primary{
+background:white;
+color:#6D4CFF;
+padding:16px 28px;
+border-radius:14px;
+font-weight:700;
+text-decoration:none;
+}
+
+.cta-btn-secondary{
+border:2px solid white;
+color:white;
+padding:16px 28px;
+border-radius:14px;
+font-weight:700;
+text-decoration:none;
+}
+
+.floating-register{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#AE59FF;
+color:white;
+padding:16px 24px;
+border-radius:999px;
+font-weight:700;
+text-decoration:none;
+box-shadow:0 15px 35px rgba(174,89,255,.35);
+z-index:999;
+}
+
+footer{
+padding:40px 20px;
+text-align:center;
+background:#111827;
+color:white;
+}
+
+footer h3{
+margin-bottom:10px;
+}
+
+.footer-small{
+margin-top:15px;
+opacity:.7;
+font-size:14px;
+}
+
+@media(max-width:600px){
+
+.cta-box h2{
+font-size:34px;
+}
+
+.cta-price .new{
+font-size:46px;
+}
+
+.floating-register{
+left:15px;
+right:15px;
+bottom:15px;
+text-align:center;
+}
+
+}
+
+.hidden{
+opacity:0;
+transform:translateY(40px);
+transition:.6s;
+}
+
+.show{
+opacity:1;
+transform:translateY(0);
+}
+
+</style>
+
+
+<script>
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+
+btn.addEventListener('click', () => {
+
+const item = btn.parentElement;
+
+const wasOpen = item.classList.contains('active');
+
+document.querySelectorAll('.faq-item')
+.forEach(el => el.classList.remove('active'));
+
+if(!wasOpen){
+item.classList.add('active');
+}
+
+});
+
+});
+
+</script>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+
+});
+
+});
+
+document.querySelectorAll(
+'.feature-card,.mentor-card,.testimonial-card,.timeline-item'
+).forEach(el => {
+
+el.classList.add('hidden');
+observer.observe(el);
+
+});
+</script>
+
+<script>
+
+const hamburger =
+document.getElementById("hamburger");
+
+const navMenu =
+document.querySelector(".nav-menu");
+
+hamburger.addEventListener("click",()=>{
+
+navMenu.classList.toggle("active");
+
+});
+
+</script>
+
+</body>
+</html>
