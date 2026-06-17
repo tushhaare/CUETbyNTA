@@ -554,297 +554,76 @@
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
 
-
-<!-- NOTICE POPUP -->
-
-<div class="notice-popup-overlay" id="noticePopup">
-
-    <div class="notice-popup-box">
-
-        <button class="notice-popup-close" id="closePopup">
-            ×
-        </button>
-
-        <div class="notice-popup-content">
-
-            <span style="
-                background:#f3e8ff;
-                color:#AE59FF;
-                padding:8px 16px;
-                border-radius:50px;
-                font-weight:700;
-                font-size:14px;
-                display:inline-block;
-                margin-bottom:20px;
-            ">
-                Latest Updates
-            </span>
-
-            <h2 style="
-                font-size:42px;
-                margin-bottom:15px;
-            ">
-                Recent Notices
-            </h2>
-
-            <p style="
-                color:#667085;
-                margin-bottom:30px;
-            ">
-                Stay updated with the latest announcements and updates from CUETbyNTA.
-            </p>
-
-            <div class="notice-popup-list">
-
-                <a href="#">MARGDARSHAN 2026 registrations starts soon!</a>
-
-                <a href="https://www.whatsapp.com/channel/0029Va9z74P4tRs1l21nE62F">Follow our WhatsApp Channel</a>
-
-                <a href="https://instagram.com/cuetbynta/">Follow us on Instagram</a>
-
-            </div>
-
-        </div>
-
-        </div>
-
-    </div>
-
-</div>
-
 <script>
-
-window.addEventListener("load", function(){
-
-    const popup = document.getElementById("noticePopup");
-    const closeBtn = document.getElementById("closePopup");
-
-    popup.classList.add("active");
-
-    closeBtn.addEventListener("click", function(){
-        popup.classList.remove("active");
-    });
-
-    popup.addEventListener("click", function(e){
-        if(e.target === popup){
-            popup.classList.remove("active");
-        }
-    });
-
-});
-
-</script>
-
-<script>
-
 window.addEventListener("load", function () {
 
-    // LOCK SCROLL
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    document.body.style.height = "100vh";
-
-    // CREATE OVERLAY
     const overlay = document.createElement("div");
-
-    overlay.id = "cuetPopupOverlay";
 
     overlay.style.cssText = `
         position:fixed;
         inset:0;
-        width:100vw;
-        height:100vh;
-        background:rgba(7,12,28,0.78);
-        backdrop-filter:blur(6px);
-        z-index:9999999999;
+        background:rgba(0,0,0,.75);
         display:flex;
         align-items:center;
         justify-content:center;
-        padding:20px;
-        overflow:hidden;
+        z-index:999999;
+        padding:15px;
     `;
 
-    // RESPONSIVE CHECK
-    const isMobile = window.innerWidth <= 768;
-
-    // POPUP
     const popup = document.createElement("div");
 
-    popup.style.cssText = isMobile
-    ? `
-        width:100%;
-        max-height:92vh;
-        overflow-y:auto;
-        background:#fff;
-        border-radius:24px 24px 0 0;
-        position:fixed;
-        bottom:30;
-        left:3;
-        right:3;
-        animation:slideUp .35s ease;
-        font-family:'Mulish',sans-serif;
-    `
-    : `
-        width:100%;
-        max-width:920px;
-        background:#fff;
-        border-radius:24px;
-        overflow:hidden;
-        display:flex;
+    popup.style.cssText = `
         position:relative;
-        box-shadow:0 25px 60px rgba(0,0,0,0.25);
-        animation:popupFade .35s ease;
-        font-family:'Mulish',sans-serif;
+        width:min(92vw, 520px);
     `;
 
     popup.innerHTML = `
-
-        <style>
-
-        @keyframes popupFade{
-            from{
-                opacity:0;
-                transform:translateY(25px);
-            }
-            to{
-                opacity:1;
-                transform:translateY(0);
-            }
-        }
-
-        @keyframes slideUp{
-            from{
-                transform:translateY(100%);
-            }
-            to{
-                transform:translateY(0);
-            }
-        }
-
-        .cuet-popup-left{ flex:1; padding:${isMobile ? "22px 16px 18px" : "55px"}; }
-
-        .cuet-popup-badge{
-            display:inline-block;
-            background:#f3e8ff;
-            color:#AE59FF;
-            padding:8px 16px;
-            border-radius:50px;
-            font-size:13px;
-            font-weight:700;
-            margin-bottom:18px;
-        }
-
-        .cuet-popup-title{
-            font-size:${isMobile ? "22px" : "44px"};
-            line-height:1.2;
-            color:#4255A4;
-            font-weight:700;
-            margin-bottom:14px;
-            font-family:'Josefin Sans',sans-serif;
-        }
-
-        .cuet-popup-text{
-            color:#667085;
-            line-height:1.7;
-            margin-bottom:24px;
-            font-size:${isMobile ? "14px" : "16px"};
-        }
-
-        .cuet-popup-link{
-            display:block;
-            padding:${isMobile ? "14px" : "16px"};
-            background:#f7f8ff;
-            border-radius:12px;
-            margin-bottom:12px;
-            color:#4255A4;
-            text-decoration:none;
-            font-weight:600;
-            transition:.25s;
-            font-size:${isMobile ? "14px" : "15px"};
-        }
-
-        .cuet-popup-link:hover{
-            background:#AE59FF;
-            color:#fff;
-            transform:translateX(5px);
-        }
-
-        .cuet-popup-side{
-            width:${isMobile ? "100%" : "280px"}; display:${isMobile ? "none" : "flex"};
-            min-height:${isMobile ? "140px" : "auto"};
-            background:linear-gradient(135deg,#AE59FF,#6D4CFF);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color:#fff;
-            text-align:center;
-            padding:25px;
-            font-weight:700;
-            font-size:${isMobile ? "20px" : "28px"};
-            line-height:1.5;
-        }
-
-        .cuet-close{
-            position:absolute; top:12px; right:12px; width:${isMobile ? "38px" : "42px"}; height:${isMobile ? "38px" : "42px"};
+        <button id="closePosterPopup" style="
+            position:absolute;
+            top:-12px;
+            right:-12px;
+            width:38px;
+            height:38px;
             border:none;
             border-radius:50%;
-            background:#111827;
-            color:#fff;
-            font-size:26px;
+            background:#fff;
+            font-size:24px;
+            font-weight:bold;
             cursor:pointer;
             z-index:10;
-        }
+            box-shadow:0 4px 15px rgba(0,0,0,.2);
+        ">×</button>
 
-        </style>
-
-        <button class="cuet-close" id="cuetCloseBtn">×</button>
-
-        ${isMobile ? "" : `<div class="cuet-popup-left">`}
-
-        <div class="cuet-popup-badge">
-            Latest Updates
-        </div>
-
-        <div class="cuet-popup-title">
-            Recent Notices
-        </div>
-
-        <div class="cuet-popup-text">
-            Stay updated with the latest announcements and important CUET updates from CUETbyNTA.
-        </div>
-
-        <a href="#" class="cuet-popup-link">
-            MARGDARSHAN 2026 registrations starts soon!
+        <a href="https://cuetbynta.pages.dev/margdarshan-2026/" target="_blank">
+            <img
+                src="assets/img/popup.png"
+                alt="Poster"
+                style="
+                    width:100%;
+                    aspect-ratio:1/1;
+                    object-fit:cover;
+                    display:block;
+                    border-radius:18px;
+                    box-shadow:0 15px 40px rgba(0,0,0,.3);
+                "
+            >
         </a>
-
-        <a href="https://instagram.com/cuetbynta/" class="cuet-popup-link">
-            Follow us on Instagram
-        </a>
-
-        <a href="https://www.whatsapp.com/channel/0029Va9z74P4tRs1l21nE62F" class="cuet-popup-link">
-            Follow our WhatsApp Channel
-        </a>
-
-
     `;
 
     overlay.appendChild(popup);
     document.body.appendChild(overlay);
 
-    // CLOSE
-    document
-        .getElementById("cuetCloseBtn")
-        .onclick = function(){
-
+    document.getElementById("closePosterPopup").onclick = () => {
         overlay.remove();
-
-        document.documentElement.style.overflow = "auto";
-        document.body.style.overflow = "auto";
-        document.body.style.height = "auto";
     };
 
-});
+    overlay.addEventListener("click", function(e){
+        if(e.target === overlay){
+            overlay.remove();
+        }
+    });
 
+});
 </script>
 
 </body>
