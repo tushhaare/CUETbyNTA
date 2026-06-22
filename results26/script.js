@@ -157,3 +157,20 @@ setInterval(
     loadStatus,
     30000
 );
+
+let seconds = 30;
+
+setInterval(() => {
+
+    seconds--;
+
+    document.getElementById(
+        "countdown"
+    ).textContent =
+        seconds + "s";
+
+    if(seconds <= 0){
+        seconds = 30;
+    }
+
+}, 1000);
