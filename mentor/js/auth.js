@@ -1,72 +1,89 @@
-/*
-  Production authentication hook.
+const SUPABASE_URL = "https://sjetveelmoorrhxtlndt.supabase.co";
 
-  This starter intentionally does NOT contain real passwords.
-  Connect this file to Supabase Auth (recommended) or another
-  authentication provider before putting the portal into production.
-*/
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_bJn6AT56orTZjj13dLCnqw_lPnRNvBl";
 
-const DEMO_MODE = true;
-
-const DEMO_MENTOR = {
-  mentorId: "M001",
-  name: "Tushar",
-  email: "mentor@example.com",
-  certificateId: "CBNTA-M-2026-001"
-};
-
-function getCurrentMentor() {
-  try {
-    return JSON.parse(sessionStorage.getItem("cbnta_mentor")) || null;
-  } catch {
-    return null;
-  }
-}
-
-function setCurrentMentor(mentor) {
-  sessionStorage.setItem("cbnta_mentor", JSON.stringify(mentor));
-}
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
 function logout() {
-  sessionStorage.removeItem("cbnta_mentor");
-  window.location.href = "login.html";
+  supabaseClient.auth.signOut().finally(() => {
+    sessionStorage.removeItem("cbnta_mentor");
+    window.location.href = "login.html";
+  });
+}
+
+async function loadMentorSession() {
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error || !data.session) {
+    window.location.href = "login.html";
+    return null;
+  }
+
+  const user = data.session.user;
+
+  const mentor = {
+    mentorId: user.user_metadata?.mentor_id,
+    certificateId: user.user_metadata?.certificate_id,
+    name: user.user_metadata?.name || user.email?.split("@")[0],
+    email: user.email
+  };
+
+  sessionStorage.setItem("cbnta_mentor", JSON.stringify(mentor));
+
+  return mentor;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
 
   if (form) {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const message = document.getElementById("loginMessage");
 
-      if (!email || !password) return;
+      message.textContent = "Signing in...";
 
-      if (DEMO_MODE) {
-        /*
-          Demo credentials for local UI testing only.
-          REMOVE DEMO_MODE and connect real authentication before launch.
-        */
-        if (email === "mentor@example.com" && password === "demo123") {
-          setCurrentMentor(DEMO_MENTOR);
-          window.location.href = "dashboard.html";
-        } else {
-          message.textContent = "Demo login: mentor@example.com / demo123";
-        }
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+      if (error) {
+        message.textContent = "Invalid email or password.";
+        return;
       }
+
+      const user = data.user;
+
+      sessionStorage.setItem(
+        "cbnta_mentor",
+        JSON.stringify({
+          mentorId: user.user_metadata?.mentor_id,
+          certificateId: user.user_metadata?.certificate_id,
+          name: user.user_metadata?.name || email.split("@")[0],
+          email: user.email
+        })
+      );
+
+      window.location.href = "dashboard.html";
     });
   }
 
   const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) logoutBtn.addEventListener("click", logout);
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", logout);
+  }
 
   if (window.location.pathname.endsWith("/dashboard.html")) {
-    const mentor = getCurrentMentor();
-    if (!mentor) {
-      window.location.href = "login.html";
-    }
+    loadMentorSession();
   }
 });
