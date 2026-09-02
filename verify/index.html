@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Verification | CUETbyNTA</title>
+  <link rel="stylesheet" href="../mentor/css/mentor.css">
+  <style>
+    .verify-page { min-height: 100vh; display: grid; place-items: center; padding: 28px; }
+    .verify-card { width: min(100%, 620px); background: #fff; border: 1px solid #e7e8eb; border-radius: 22px; padding: 48px; box-shadow: 0 20px 60px rgba(0,0,0,.06); }
+    .verify-brand { font-size: 25px; font-weight: 800; letter-spacing: -.04em; margin-bottom: 65px; }
+    .verify-brand span { font-weight: 400; }
+    .verified { display: inline-flex; align-items: center; gap: 8px; background: #eef8f1; color: #237a4b; border-radius: 999px; padding: 9px 13px; font-size: 12px; font-weight: 800; }
+    .verified i { width: 8px; height: 8px; background: #2f9e63; border-radius: 50%; }
+    .verify-card h1 { font-size: 38px; letter-spacing: -.04em; margin: 18px 0 10px; }
+    .details { margin-top: 34px; border-top: 1px solid #e7e8eb; }
+    .detail { display: flex; justify-content: space-between; gap: 20px; padding: 18px 0; border-bottom: 1px solid #e7e8eb; }
+    .detail span { color: #747780; font-size: 13px; }
+    .detail strong { font-size: 13px; text-align: right; }
+    .invalid { background: #fff2f0; color: #b42318; }
+    @media(max-width:600px){ .verify-card{padding:30px 24px}.verify-brand{margin-bottom:40px}.verify-card h1{font-size:31px}.detail{flex-direction:column;gap:5px}.detail strong{text-align:left} }
+  </style>
+</head>
+<body>
+  <main class="verify-page">
+    <section class="verify-card" id="verificationCard">
+      <div class="verify-brand">CUET<span>byNTA</span></div>
+
+      <div class="verified" id="statusBadge"><i></i><span>VERIFIED</span></div>
+      <h1>Certificate verification</h1>
+      <p class="muted" id="statusText">This certificate has been officially issued by CUETbyNTA.</p>
+
+      <div class="details">
+        <div class="detail"><span>Name</span><strong id="name">Tushar</strong></div>
+        <div class="detail"><span>Role</span><strong id="role">Mentor</strong></div>
+        <div class="detail"><span>Programme</span><strong id="programme">CUETbyNTA Mentors' Programme</strong></div>
+        <div class="detail"><span>Certificate ID</span><strong id="certificateId">CBNTA-M-2026-001</strong></div>
+        <div class="detail"><span>Date of Issue</span><strong id="issueDate">02 September 2026</strong></div>
+        <div class="detail"><span>Status</span><strong id="status">VALID</strong></div>
+      </div>
+
+      <p class="muted" style="font-size:12px;margin-top:28px">Official certificate verification page · CUETbyNTA</p>
+    </section>
+  </main>
+
+  <script src="verify.js"></script>
+</body>
+</html>
