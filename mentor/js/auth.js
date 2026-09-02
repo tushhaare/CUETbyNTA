@@ -1,12 +1,22 @@
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
 const SUPABASE_URL = "https://sjetveelmoorrhxtlndt.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_bJn6AT56orTZjj13dLCnqw_lPnRNvBl";
 
-const supabaseClient = supabase.createClient(
+const supabaseClient = createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
+
+function getCurrentMentor() {
+  try {
+    return JSON.parse(sessionStorage.getItem("cbnta_mentor")) || null;
+  } catch {
+    return null;
+  }
+}
 
 function logout() {
   supabaseClient.auth.signOut().finally(() => {
@@ -15,33 +25,14 @@ function logout() {
   });
 }
 
-async function loadMentorSession() {
-  const { data, error } = await supabaseClient.auth.getSession();
+document.addEventListener("DOMContentLoaded", async () => {
 
-  if (error || !data.session) {
-    window.location.href = "login.html";
-    return null;
-  }
-
-  const user = data.session.user;
-
-  const mentor = {
-    mentorId: user.user_metadata?.mentor_id,
-    certificateId: user.user_metadata?.certificate_id,
-    name: user.user_metadata?.name || user.email?.split("@")[0],
-    email: user.email
-  };
-
-  sessionStorage.setItem("cbnta_mentor", JSON.stringify(mentor));
-
-  return mentor;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
 
   if (form) {
+
     form.addEventListener("submit", async (event) => {
+
       event.preventDefault();
 
       const email = document.getElementById("email").value.trim();
@@ -57,20 +48,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
       if (error) {
+        console.error(error);
         message.textContent = "Invalid email or password.";
         return;
       }
 
       const user = data.user;
 
+      const mentor = {
+        mentorId: user.user_metadata?.mentor_id,
+        certificateId: user.user_metadata?.certificate_id,
+        name: user.user_metadata?.name || email.split("@")[0],
+        email: user.email
+      };
+
       sessionStorage.setItem(
         "cbnta_mentor",
-        JSON.stringify({
-          mentorId: user.user_metadata?.mentor_id,
-          certificateId: user.user_metadata?.certificate_id,
-          name: user.user_metadata?.name || email.split("@")[0],
-          email: user.email
-        })
+        JSON.stringify(mentor)
       );
 
       window.location.href = "dashboard.html";
@@ -84,6 +78,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (window.location.pathname.endsWith("/dashboard.html")) {
-    loadMentorSession();
+
+    const { data } = await supabaseClient.auth.getSession();
+
+    if (!data.session) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    const user = data.session.user;
+
+    sessionStorage.setItem(
+      "cbnta_mentor",
+      JSON.stringify({
+        mentorId: user.user_metadata?.mentor_id,
+        certificateId: user.user_metadata?.certificate_id,
+        name: user.user_metadata?.name || user.email?.split("@")[0],
+        email: user.email
+      })
+    );
   }
+
 });
