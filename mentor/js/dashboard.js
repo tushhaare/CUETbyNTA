@@ -1,13 +1,63 @@
 const MENTORS = {
   M001: {
-    mentorId: "M001",
     name: "Tushar",
     certificateId: "CBNTA-M-2026-001",
     lorFile: "../../assets/mentors/M001/lor.pdf",
-    certificateFile: "../../assets/mentors/M001/certificate.pdf",
-    verificationPath: "../../verify/?id=CBNTA-M-2026-001",
-    linkedinText:
-      "Proud to have completed my mentorship journey with CUETbyNTA as a Mentor.\\n\\nIt was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\\n\\nThank you, CUETbyNTA, for the opportunity.\\n\\n#CUETbyNTA #CUET #Mentorship #Education"
+    certificateFile: "../../assets/mentors/M001/certificate.pdf"
+  },
+  M002: {
+    name: "Archi Bajaj",
+    certificateId: "CBNTA-M-2026-002",
+    lorFile: "../../assets/mentors/M002/lor.pdf",
+    certificateFile: "../../assets/mentors/M002/certificate.pdf"
+  },
+  M003: {
+    name: "Ashish",
+    certificateId: "CBNTA-M-2026-003",
+    lorFile: "../../assets/mentors/M003/lor.pdf",
+    certificateFile: "../../assets/mentors/M003/certificate.pdf"
+  },
+  M004: {
+    name: "Gauri",
+    certificateId: "CBNTA-M-2026-004",
+    lorFile: "../../assets/mentors/M004/lor.pdf",
+    certificateFile: "../../assets/mentors/M004/certificate.pdf"
+  },
+  M005: {
+    name: "Jiyashri",
+    certificateId: "CBNTA-M-2026-005",
+    lorFile: "../../assets/mentors/M005/lor.pdf",
+    certificateFile: "../../assets/mentors/M005/certificate.pdf"
+  },
+  M006: {
+    name: "Khushali Solanki",
+    certificateId: "CBNTA-M-2026-006",
+    lorFile: "../../assets/mentors/M006/lor.pdf",
+    certificateFile: "../../assets/mentors/M006/certificate.pdf"
+  },
+  M007: {
+    name: "Meenakshi Goswami",
+    certificateId: "CBNTA-M-2026-007",
+    lorFile: "../../assets/mentors/M007/lor.pdf",
+    certificateFile: "../../assets/mentors/M007/certificate.pdf"
+  },
+  M008: {
+    name: "Prince P.K.",
+    certificateId: "CBNTA-M-2026-008",
+    lorFile: "../../assets/mentors/M008/lor.pdf",
+    certificateFile: "../../assets/mentors/M008/certificate.pdf"
+  },
+  M009: {
+    name: "Prince Patel",
+    certificateId: "CBNTA-M-2026-009",
+    lorFile: "../../assets/mentors/M009/lor.pdf",
+    certificateFile: "../../assets/mentors/M009/certificate.pdf"
+  },
+  M010: {
+    name: "Purvi Agrawal",
+    certificateId: "CBNTA-M-2026-010",
+    lorFile: "../../assets/mentors/M010/lor.pdf",
+    certificateFile: "../../assets/mentors/M010/certificate.pdf"
   }
 };
 
@@ -15,10 +65,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const sessionMentor = getCurrentMentor();
   if (!sessionMentor) return;
 
-  const mentor = MENTORS[sessionMentor.mentorId] || MENTORS.M001;
+  const mentor = MENTORS[sessionMentor.mentorId];
+
+  if (!mentor) {
+    window.location.href = "login.html";
+    return;
+  }
 
   document.getElementById("mentorName").textContent = mentor.name;
-  document.getElementById("navMentorName").textContent = mentor.email;
+  document.getElementById("navMentorName").textContent = sessionMentor.email;
   document.getElementById("certificateId").textContent = mentor.certificateId;
 
   const lor = document.getElementById("lorLink");
@@ -28,11 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   lor.href = mentor.lorFile;
   certificate.href = mentor.certificateFile;
-  verification.href = mentor.verificationPath;
+  verification.href = `../../verify/?id=${mentor.certificateId}`;
 
-  const shareUrl =
+  const linkedinText =
+    `Proud to have completed my mentorship journey with CUETbyNTA as a Mentor.\n\n` +
+    `It was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\n\n` +
+    `Thank you, CUETbyNTA, for the opportunity.\n\n` +
+    `#CUETbyNTA #CUET #Mentorship #Education`;
+
+  linkedin.href =
     "https://www.linkedin.com/feed/?shareActive=true&text=" +
-    encodeURIComponent(mentor.linkedinText);
-
-  linkedin.href = shareUrl;
+    encodeURIComponent(linkedinText);
 });
