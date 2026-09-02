@@ -18,6 +18,8 @@ function getCurrentMentor() {
   }
 }
 
+window.getCurrentMentor = getCurrentMentor;
+
 function logout() {
   supabaseClient.auth.signOut().finally(() => {
     sessionStorage.removeItem("cbnta_mentor");
