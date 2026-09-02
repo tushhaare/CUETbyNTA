@@ -6,7 +6,7 @@ const MENTORS = {
     certificateFile: "../../assets/mentors/M001/certificate.pdf"
   },
   M002: {
-    name: "Archi Bajaj",
+    name: "Archi",
     certificateId: "CBNTA-M-2026-002",
     lorFile: "../../assets/mentors/M002/lor.pdf",
     certificateFile: "../../assets/mentors/M002/certificate.pdf"
@@ -24,37 +24,37 @@ const MENTORS = {
     certificateFile: "../../assets/mentors/M004/certificate.pdf"
   },
   M005: {
-    name: "Jiyashri",
+    name: "Jiya",
     certificateId: "CBNTA-M-2026-005",
     lorFile: "../../assets/mentors/M005/lor.pdf",
     certificateFile: "../../assets/mentors/M005/certificate.pdf"
   },
   M006: {
-    name: "Khushali Solanki",
+    name: "Khushali",
     certificateId: "CBNTA-M-2026-006",
     lorFile: "../../assets/mentors/M006/lor.pdf",
     certificateFile: "../../assets/mentors/M006/certificate.pdf"
   },
   M007: {
-    name: "Meenakshi Goswami",
+    name: "Meenakshi",
     certificateId: "CBNTA-M-2026-007",
     lorFile: "../../assets/mentors/M007/lor.pdf",
     certificateFile: "../../assets/mentors/M007/certificate.pdf"
   },
   M008: {
-    name: "Prince P.K.",
+    name: "Prince",
     certificateId: "CBNTA-M-2026-008",
     lorFile: "../../assets/mentors/M008/lor.pdf",
     certificateFile: "../../assets/mentors/M008/certificate.pdf"
   },
   M009: {
-    name: "Prince Patel",
+    name: "Prince",
     certificateId: "CBNTA-M-2026-009",
     lorFile: "../../assets/mentors/M009/lor.pdf",
     certificateFile: "../../assets/mentors/M009/certificate.pdf"
   },
   M010: {
-    name: "Purvi Agrawal",
+    name: "Purvi",
     certificateId: "CBNTA-M-2026-010",
     lorFile: "../../assets/mentors/M010/lor.pdf",
     certificateFile: "../../assets/mentors/M010/certificate.pdf"
