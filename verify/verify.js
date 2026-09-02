@@ -19,7 +19,7 @@ const CERTIFICATES = {
   },
 
   "CBNTA-M-2026-003": {
-    name: "Ashish",
+    name: "Ashish Kumar",
     role: "Mentor",
     programme: "CUETbyNTA Mentors' Programme",
     certificateId: "CBNTA-M-2026-003",
@@ -28,7 +28,7 @@ const CERTIFICATES = {
   },
 
   "CBNTA-M-2026-004": {
-    name: "Gauri",
+    name: "Gauri Sapra",
     role: "Mentor",
     programme: "CUETbyNTA Mentors' Programme",
     certificateId: "CBNTA-M-2026-004",
@@ -37,7 +37,7 @@ const CERTIFICATES = {
   },
 
   "CBNTA-M-2026-005": {
-    name: "Jiyashri",
+    name: "Jiya Shrivastav",
     role: "Mentor",
     programme: "CUETbyNTA Mentors' Programme",
     certificateId: "CBNTA-M-2026-005",
@@ -64,7 +64,7 @@ const CERTIFICATES = {
   },
 
   "CBNTA-M-2026-008": {
-    name: "Prince P.K.",
+    name: "Prince Kumar",
     role: "Mentor",
     programme: "CUETbyNTA Mentors' Programme",
     certificateId: "CBNTA-M-2026-008",
