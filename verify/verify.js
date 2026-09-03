@@ -1,7 +1,7 @@
 const CERTIFICATES = {
 
   "CBNTA-M-2026-001": {
-    name: "Tushar",
+    name: "Satyam Kumar",
     role: "Mentor",
     mentorId: "M001",
     programme: "CUETbyNTA Mentors' Programme",
