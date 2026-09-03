@@ -3,46 +3,326 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Certificate Verification | CUETbyNTA</title>
-  <link rel="stylesheet" href="../mentor/css/mentor.css">
+
   <style>
-    .verify-page { min-height: 100vh; display: grid; place-items: center; padding: 28px; }
-    .verify-card { width: min(100%, 620px); background: #fff; border: 1px solid #e7e8eb; border-radius: 22px; padding: 48px; box-shadow: 0 20px 60px rgba(0,0,0,.06); }
-    .verify-brand { font-size: 25px; font-weight: 800; letter-spacing: -.04em; margin-bottom: 65px; }
-    .verify-brand span { font-weight: 400; }
-    .verified { display: inline-flex; align-items: center; gap: 8px; background: #eef8f1; color: #237a4b; border-radius: 999px; padding: 9px 13px; font-size: 12px; font-weight: 800; }
-    .verified i { width: 8px; height: 8px; background: #2f9e63; border-radius: 50%; }
-    .verify-card h1 { font-size: 38px; letter-spacing: -.04em; margin: 18px 0 10px; }
-    .details { margin-top: 34px; border-top: 1px solid #e7e8eb; }
-    .detail { display: flex; justify-content: space-between; gap: 20px; padding: 18px 0; border-bottom: 1px solid #e7e8eb; }
-    .detail span { color: #747780; font-size: 13px; }
-    .detail strong { font-size: 13px; text-align: right; }
-    .invalid { background: #fff2f0; color: #b42318; }
-    @media(max-width:600px){ .verify-card{padding:30px 24px}.verify-brand{margin-bottom:40px}.verify-card h1{font-size:31px}.detail{flex-direction:column;gap:5px}.detail strong{text-align:left} }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #171827;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(101, 87, 245, .12), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(198, 77, 242, .12), transparent 30%),
+        #f7f7fb;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 30px 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .verification-card {
+      width: 100%;
+      max-width: 680px;
+      background: #fff;
+      border: 1px solid #e7e7ef;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(37, 30, 80, .10);
+    }
+
+    .top {
+      position: relative;
+      padding: 28px 32px 75px;
+      color: #fff;
+      background: linear-gradient(
+        135deg,
+        #5b6ff5 0%,
+        #8061f5 48%,
+        #c451ef 100%
+      );
+    }
+
+    .brand {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+    }
+
+    .brand span {
+      font-weight: 400;
+    }
+
+    .top-label {
+      margin-top: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      opacity: .8;
+    }
+
+    .profile {
+      margin: -52px 32px 0;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .photo-wrap {
+      width: 112px;
+      height: 112px;
+      margin: auto;
+      padding: 4px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 12px 35px rgba(38, 31, 82, .18);
+    }
+
+    .photo,
+    .initials {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .photo {
+      object-fit: cover;
+      display: block;
+    }
+
+    .initials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #6674f6, #c451ef);
+      color: white;
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .profile h1 {
+      margin: 17px 0 5px;
+      font-size: 30px;
+      letter-spacing: -.8px;
+    }
+
+    .role {
+      margin: 0;
+      color: #777986;
+      font-size: 14px;
+    }
+
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 17px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #eaf8f0;
+      color: #237a4b;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .verified-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2f9e63;
+    }
+
+    .content {
+      padding: 30px 32px 34px;
+    }
+
+    .status-message {
+      margin: 0 0 25px;
+      text-align: center;
+      color: #696b78;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .details {
+      border: 1px solid #e9e9ef;
+      border-radius: 17px;
+      overflow: hidden;
+    }
+
+    .detail {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      padding: 17px 19px;
+      border-bottom: 1px solid #ededf1;
+    }
+
+    .detail:last-child {
+      border-bottom: 0;
+    }
+
+    .label {
+      color: #777986;
+      font-size: 13px;
+    }
+
+    .value {
+      text-align: right;
+      font-size: 13px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .valid-value {
+      color: #237a4b;
+    }
+
+    .footer {
+      margin-top: 25px;
+      text-align: center;
+      color: #9a9ba5;
+      font-size: 11px;
+    }
+
+    .invalid {
+      background: #fff1f0 !important;
+      color: #b42318 !important;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 15px;
+      }
+
+      .top {
+        padding: 23px 23px 70px;
+      }
+
+      .content {
+        padding: 25px 20px 28px;
+      }
+
+      .profile {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+
+      .profile h1 {
+        font-size: 26px;
+      }
+
+      .detail {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .value {
+        text-align: left;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <main class="verify-page">
-    <section class="verify-card" id="verificationCard">
-      <div class="verify-brand">CUET<span>byNTA</span></div>
 
-      <div class="verified" id="statusBadge"><i></i><span>VERIFIED</span></div>
-      <h1>Certificate verification</h1>
-      <p class="muted" id="statusText">This certificate has been officially issued by CUETbyNTA.</p>
+  <main class="page">
 
-      <div class="details">
-        <div class="detail"><span>Name</span><strong id="name">Tushar</strong></div>
-        <div class="detail"><span>Role</span><strong id="role">Mentor</strong></div>
-        <div class="detail"><span>Programme</span><strong id="programme">CUETbyNTA Mentors' Programme</strong></div>
-        <div class="detail"><span>Certificate ID</span><strong id="certificateId">CBNTA-M-2026-001</strong></div>
-        <div class="detail"><span>Date of Issue</span><strong id="issueDate">02 September 2026</strong></div>
-        <div class="detail"><span>Status</span><strong id="status">VALID</strong></div>
+    <section class="verification-card">
+
+      <div class="top">
+        <div class="brand">
+          CUET<span>byNTA</span>
+        </div>
+
+        <div class="top-label">
+          OFFICIAL CERTIFICATE VERIFICATION
+        </div>
       </div>
 
-      <p class="muted" style="font-size:12px;margin-top:28px">Official certificate verification page · CUETbyNTA</p>
+      <div class="profile">
+
+        <div class="photo-wrap">
+          <img
+            id="mentorPhoto"
+            class="photo"
+            src=""
+            alt="Mentor photo"
+            style="display:none;"
+          >
+
+          <div id="mentorInitials" class="initials">
+            ?
+          </div>
+        </div>
+
+        <h1 id="name">—</h1>
+
+        <p class="role" id="role">
+          Mentor
+        </p>
+
+        <div class="verified" id="statusBadge">
+          <span class="verified-dot"></span>
+          <span id="statusBadgeText">VERIFIED</span>
+        </div>
+
+      </div>
+
+      <div class="content">
+
+        <p class="status-message" id="statusText">
+          This certificate has been officially issued by CUETbyNTA.
+        </p>
+
+        <div class="details">
+
+          <div class="detail">
+            <span class="label">Mentor ID</span>
+            <strong class="value" id="mentorId">—</strong>
+          </div>
+
+          <div class="detail">
+            <span class="label">Certificate ID</span>
+            <strong class="value" id="certificateId">—</strong>
+          </div>
+
+          <div class="detail">
+            <span class="label">Programme</span>
+            <strong class="value" id="programme">—</strong>
+          </div>
+
+          <div class="detail">
+            <span class="label">Date of Issue</span>
+            <strong class="value" id="issueDate">—</strong>
+          </div>
+
+          <div class="detail">
+            <span class="label">Certificate Status</span>
+            <strong class="value valid-value" id="status">—</strong>
+          </div>
+
+        </div>
+
+        <div class="footer">
+          Official certificate verification page · CUETbyNTA
+        </div>
+
+      </div>
+
     </section>
+
   </main>
 
   <script src="verify.js"></script>
+
 </body>
 </html>
