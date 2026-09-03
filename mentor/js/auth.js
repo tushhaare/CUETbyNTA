@@ -10,6 +10,13 @@ const supabaseClient = createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
+/*
+ * Make the client available to dashboard.js.
+ * This is safe because this is the publishable/anon key.
+ */
+window.cbntaSupabase = supabaseClient;
+
+
 function getCurrentMentor() {
   try {
     return JSON.parse(sessionStorage.getItem("cbnta_mentor")) || null;
@@ -20,6 +27,7 @@ function getCurrentMentor() {
 
 window.getCurrentMentor = getCurrentMentor;
 
+
 function logout() {
   supabaseClient.auth.signOut().finally(() => {
     sessionStorage.removeItem("cbnta_mentor");
@@ -27,7 +35,10 @@ function logout() {
   });
 }
 
+
 document.addEventListener("DOMContentLoaded", async () => {
+
+  /* LOGIN */
 
   const form = document.getElementById("loginForm");
 
@@ -73,15 +84,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+
+  /* LOGOUT */
+
   const logoutBtn = document.getElementById("logoutBtn");
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", logout);
   }
 
+
+  /* DASHBOARD SESSION CHECK */
+
   if (window.location.pathname.endsWith("/dashboard.html")) {
 
-    const { data } = await supabaseClient.auth.getSession();
+    const { data } =
+      await supabaseClient.auth.getSession();
 
     if (!data.session) {
       window.location.href = "login.html";
@@ -95,7 +113,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       JSON.stringify({
         mentorId: user.user_metadata?.mentor_id,
         certificateId: user.user_metadata?.certificate_id,
-        name: user.user_metadata?.name || user.email?.split("@")[0],
+        name:
+          user.user_metadata?.name ||
+          user.email?.split("@")[0],
         email: user.email
       })
     );
