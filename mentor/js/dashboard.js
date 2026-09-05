@@ -73,56 +73,85 @@ const MENTORS = {
 };
 
 
-document.addEventListener("DOMContentLoaded", async () => {
 
-  const sessionMentor = getCurrentMentor();
+document.addEventListener(
+  "DOMContentLoaded",
+  async () => {
 
-  if (!sessionMentor) {
-    window.location.href = "login.html";
-    return;
+    const sessionMentor =
+      getCurrentMentor();
+
+
+    if (!sessionMentor) {
+
+      window.location.href =
+        "login.html";
+
+      return;
+    }
+
+
+    const mentor =
+      MENTORS[
+        sessionMentor.mentorId
+      ];
+
+
+    if (!mentor) {
+
+      window.location.href =
+        "login.html";
+
+      return;
+    }
+
+
+    document.getElementById(
+      "mentorName"
+    ).textContent =
+      mentor.name;
+
+
+    document.getElementById(
+      "navMentorName"
+    ).textContent =
+      sessionMentor.email;
+
+
+    document.getElementById(
+      "certificateId"
+    ).textContent =
+      mentor.certificateId;
+
+
+    document.getElementById(
+      "mentorIdInfo"
+    ).textContent =
+      sessionMentor.mentorId;
+
+
+    document.getElementById(
+      "certificateIdInfo"
+    ).textContent =
+      mentor.certificateId;
+
+
+    await setupIdentityVerification(
+      mentor
+    );
+
   }
+);
 
 
-  const mentor = MENTORS[sessionMentor.mentorId];
 
-  if (!mentor) {
-    window.location.href = "login.html";
-    return;
-  }
+async function setupIdentityVerification(
+  mentor
+) {
 
+  const supabase =
+    window.cbntaSupabase;
 
-  /* BASIC INFORMATION */
-
-  document.getElementById("mentorName").textContent =
-    mentor.name;
-
-  document.getElementById("navMentorName").textContent =
-    sessionMentor.email;
-
-  document.getElementById("certificateId").textContent =
-    mentor.certificateId;
-
-  document.getElementById("mentorIdInfo").textContent =
-    sessionMentor.mentorId;
-
-  document.getElementById("certificateIdInfo").textContent =
-    mentor.certificateId;
-
-
-  /*
-   * IMPORTANT:
-   * Do not unlock anything until Supabase
-   * confirms the ID submission.
-   */
-
-  await setupIdentityVerification(mentor);
-
-});
-
-
-async function setupIdentityVerification(mentor) {
-
-  const supabase = window.cbntaSupabase;
 
   if (!supabase) {
 
@@ -135,51 +164,122 @@ async function setupIdentityVerification(mentor) {
 
 
   const identitySection =
-    document.getElementById("identitySection");
+    document.getElementById(
+      "identitySection"
+    );
+
+
+  const uploadArea =
+    document.getElementById(
+      "uploadArea"
+    );
+
+
+  const submittedArea =
+    document.getElementById(
+      "submittedArea"
+    );
+
+
+  const submittedFileName =
+    document.getElementById(
+      "submittedFileName"
+    );
+
+
+  const viewSubmittedId =
+    document.getElementById(
+      "viewSubmittedId"
+    );
+
 
   const documentsSection =
-    document.getElementById("documentsSection");
+    document.getElementById(
+      "documentsSection"
+    );
+
 
   const verificationSection =
-    document.getElementById("verificationSection");
+    document.getElementById(
+      "verificationSection"
+    );
+
 
   const infoSection =
-    document.getElementById("infoSection");
+    document.getElementById(
+      "infoSection"
+    );
+
 
   const importantSection =
-    document.getElementById("importantSection");
+    document.getElementById(
+      "importantSection"
+    );
 
 
   const form =
-    document.getElementById("idUploadForm");
+    document.getElementById(
+      "idUploadForm"
+    );
+
 
   const fileInput =
-    document.getElementById("idFile");
+    document.getElementById(
+      "idFile"
+    );
+
 
   const signoff =
-    document.getElementById("idSignoff");
+    document.getElementById(
+      "idSignoff"
+    );
+
 
   const submitBtn =
-    document.getElementById("idSubmitBtn");
+    document.getElementById(
+      "idSubmitBtn"
+    );
+
 
   const status =
-    document.getElementById("idStatus");
+    document.getElementById(
+      "idStatus"
+    );
+
 
   const statusBox =
-    document.getElementById("idVerificationStatus");
+    document.getElementById(
+      "idVerificationStatus"
+    );
+
 
   const statusInfo =
-    document.getElementById("idStatusInfo");
+    document.getElementById(
+      "idStatusInfo"
+    );
+
+
+  const linkedinBtn =
+    document.getElementById(
+      "linkedinLink"
+    );
+
+
+  const linkedinStatus =
+    document.getElementById(
+      "linkedinStatus"
+    );
 
 
   /*
-   * GET CURRENT SESSION
+   * SESSION
    */
 
   const {
     data: sessionData,
     error: sessionError
-  } = await supabase.auth.getSession();
+  } =
+    await supabase.auth.getSession();
 
 
   if (
@@ -187,7 +287,8 @@ async function setupIdentityVerification(mentor) {
     !sessionData.session
   ) {
 
-    window.location.href = "login.html";
+    window.location.href =
+      "login.html";
 
     return;
   }
@@ -210,23 +311,27 @@ async function setupIdentityVerification(mentor) {
   }
 
 
+
   /*
-   * CHECK EXISTING ID SUBMISSION
+   * CHECK SUBMISSION
    */
 
   const {
     data: existing,
     error: existingError
-  } = await supabase
-    .from("mentor_id_documents")
-    .select(
-      "status, signoff, signed_off_at, updated_at"
-    )
-    .eq(
-      "mentor_user_id",
-      user.id
-    )
-    .maybeSingle();
+  } =
+    await supabase
+      .from(
+        "mentor_id_documents"
+      )
+      .select(
+        "file_path,status,signoff,signed_off_at,updated_at"
+      )
+      .eq(
+        "mentor_user_id",
+        user.id
+      )
+      .maybeSingle();
 
 
   if (existingError) {
@@ -243,8 +348,9 @@ async function setupIdentityVerification(mentor) {
   }
 
 
+
   /*
-   * UNLOCK FUNCTION
+   * SHOW DOCUMENTS
    */
 
   function unlockDocuments() {
@@ -252,43 +358,39 @@ async function setupIdentityVerification(mentor) {
     documentsSection.style.display =
       "grid";
 
+
     verificationSection.style.display =
       "grid";
+
 
     infoSection.style.display =
       "grid";
 
-    importantSection.style.display =
-      "block";
 
-    identitySection.style.display =
+    importantSection.style.display =
       "block";
 
 
     const lor =
-      document.getElementById("lorLink");
+      document.getElementById(
+        "lorLink"
+      );
+
 
     const certificate =
       document.getElementById(
         "certificateLink"
       );
 
+
     const verification =
       document.getElementById(
         "verificationLink"
       );
 
-    const linkedin =
-      document.getElementById(
-        "linkedinLink"
-      );
-
 
     /*
      * PDF VIEWER
-     *
-     * No download attribute.
-     * Browser opens the PDF viewer.
      */
 
     lor.href =
@@ -307,20 +409,114 @@ async function setupIdentityVerification(mentor) {
      * LINKEDIN
      */
 
-    const linkedinText =
-      `Proud to have completed my mentorship journey with CUETbyNTA as a Mentor.\n\n` +
-      `It was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\n\n` +
-      `Thank you, CUETbyNTA, for the opportunity.\n\n` +
-      `#CUETbyNTA #CUET #Mentorship #Education`;
-
-
-    linkedin.href =
-      "https://www.linkedin.com/feed/?shareActive=true&text=" +
-      encodeURIComponent(
-        linkedinText
-      );
+    setupLinkedInSharing(
+      mentor,
+      linkedinBtn,
+      linkedinStatus
+    );
 
   }
+
+
+
+  /*
+   * SHOW LOCKED SUBMISSION
+   */
+
+  async function showSubmittedDocument(
+    record
+  ) {
+
+    uploadArea.style.display =
+      "none";
+
+
+    submittedArea.style.display =
+      "block";
+
+
+    statusInfo.textContent =
+      record.status === "approved"
+        ? "Approved"
+        : "Submitted";
+
+
+    statusBox.innerHTML =
+      `<div class="success-note">
+        ✓ Identity verification submitted successfully.
+      </div>`;
+
+
+    /*
+     * FILE NAME
+     */
+
+    const path =
+      record.file_path || "";
+
+
+    const filename =
+      path.split("/").pop() ||
+      "Identity document";
+
+
+    submittedFileName.textContent =
+      filename;
+
+
+    /*
+     * TEMPORARY VIEW URL
+     *
+     * Valid for 10 minutes.
+     */
+
+    const {
+      data: signedUrlData,
+      error: signedUrlError
+    } =
+      await supabase
+        .storage
+        .from(
+          "mentor-id-documents"
+        )
+        .createSignedUrl(
+          record.file_path,
+          600
+        );
+
+
+    if (
+      !signedUrlError &&
+      signedUrlData?.signedUrl
+    ) {
+
+      viewSubmittedId.href =
+        signedUrlData.signedUrl;
+
+      viewSubmittedId.style.display =
+        "inline-flex";
+
+    } else {
+
+      viewSubmittedId.style.display =
+        "none";
+
+      console.error(
+        "Could not create secure ID view URL:",
+        signedUrlError
+      );
+
+    }
+
+
+    /*
+     * UNLOCK OTHER DOCUMENTS
+     */
+
+    unlockDocuments();
+
+  }
+
 
 
   /*
@@ -336,39 +532,38 @@ async function setupIdentityVerification(mentor) {
     )
   ) {
 
-    statusInfo.textContent =
-      existing.status === "approved"
-        ? "Approved"
-        : "Submitted";
-
-
-    statusBox.innerHTML =
-      `<div class="success-note">
-        ✓ Your identity has been submitted successfully.
-        Your mentorship documents are now available.
-      </div>`;
-
-
-    unlockDocuments();
+    await showSubmittedDocument(
+      existing
+    );
 
     return;
   }
 
 
+
   /*
    * NO SUBMISSION
-   *
-   * Documents stay hidden.
    */
+
+  uploadArea.style.display =
+    "block";
+
+
+  submittedArea.style.display =
+    "none";
+
 
   documentsSection.style.display =
     "none";
 
+
   verificationSection.style.display =
     "none";
 
+
   infoSection.style.display =
     "none";
+
 
   importantSection.style.display =
     "none";
@@ -376,6 +571,7 @@ async function setupIdentityVerification(mentor) {
 
   statusInfo.textContent =
     "Not submitted";
+
 
 
   /*
@@ -388,7 +584,8 @@ async function setupIdentityVerification(mentor) {
 
       event.preventDefault();
 
-      status.textContent = "";
+      status.textContent =
+        "";
 
 
       const file =
@@ -465,15 +662,12 @@ async function setupIdentityVerification(mentor) {
       submitBtn.disabled =
         true;
 
+
       submitBtn.textContent =
         "Uploading...";
 
 
       try {
-
-        /*
-         * FILE PATH
-         */
 
         const extension =
           getFileExtension(
@@ -486,24 +680,26 @@ async function setupIdentityVerification(mentor) {
 
 
         /*
-         * PRIVATE STORAGE UPLOAD
+         * UPLOAD
          */
 
         const {
           error: uploadError
-        } = await supabase
-          .storage
-          .from(
-            "mentor-id-documents"
-          )
-          .upload(
-            filePath,
-            file,
-            {
-              upsert: true,
-              contentType: file.type
-            }
-          );
+        } =
+          await supabase
+            .storage
+            .from(
+              "mentor-id-documents"
+            )
+            .upload(
+              filePath,
+              file,
+              {
+                upsert: false,
+                contentType:
+                  file.type
+              }
+            );
 
 
         if (uploadError) {
@@ -512,17 +708,17 @@ async function setupIdentityVerification(mentor) {
 
 
         /*
-         * DATABASE RECORD
+         * DATABASE
          */
 
         const {
           error: databaseError
-        } = await supabase
-          .from(
-            "mentor_id_documents"
-          )
-          .upsert(
-            {
+        } =
+          await supabase
+            .from(
+              "mentor_id_documents"
+            )
+            .insert({
               mentor_user_id:
                 user.id,
 
@@ -543,12 +739,7 @@ async function setupIdentityVerification(mentor) {
 
               updated_at:
                 new Date().toISOString()
-            },
-            {
-              onConflict:
-                "mentor_user_id"
-            }
-          );
+            });
 
 
         if (databaseError) {
@@ -557,36 +748,19 @@ async function setupIdentityVerification(mentor) {
 
 
         /*
-         * SUCCESS
+         * LOCK IMMEDIATELY
          */
 
-        status.textContent =
-          "";
+        await showSubmittedDocument({
+          file_path:
+            filePath,
 
+          status:
+            "submitted",
 
-        statusBox.innerHTML =
-          `<div class="success-note">
-            ✓ Identity verification submitted successfully.
-            Your mentorship documents are now available.
-          </div>`;
-
-
-        statusInfo.textContent =
-          "Submitted";
-
-
-        fileInput.value =
-          "";
-
-        signoff.checked =
-          false;
-
-
-        /*
-         * NOW UNLOCK DOCUMENTS
-         */
-
-        unlockDocuments();
+          signoff:
+            true
+        });
 
 
       } catch (error) {
@@ -616,6 +790,164 @@ async function setupIdentityVerification(mentor) {
 }
 
 
+
+/*
+ * LINKEDIN SHARING
+ */
+
+function setupLinkedInSharing(
+  mentor,
+  button,
+  statusElement
+) {
+
+  if (!button) {
+    return;
+  }
+
+
+  const caption =
+    `Proud to have completed my 10-month mentorship journey with CUETbyNTA as a Mentor.\n\n` +
+    `It was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\n\n` +
+    `Thank you, CUETbyNTA, for the opportunity.\n\n` +
+    `#CUETbyNTA #CUET #Mentorship #Education`;
+
+
+  button.onclick =
+    async () => {
+
+      statusElement.textContent =
+        "";
+
+
+      /*
+       * Try native file sharing first.
+       */
+
+      try {
+
+        const response =
+          await fetch(
+            mentor.certificateFile
+          );
+
+
+        if (!response.ok) {
+          throw new Error(
+            "Certificate could not be loaded."
+          );
+        }
+
+
+        const blob =
+          await response.blob();
+
+
+        const file =
+          new File(
+            [blob],
+            "CUETbyNTA-Certificate.pdf",
+            {
+              type:
+                "application/pdf"
+            }
+          );
+
+
+        /*
+         * Browser / mobile share sheet
+         */
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({
+            files: [file]
+          })
+        ) {
+
+          await navigator.share({
+            title:
+              "CUETbyNTA Mentorship Certificate",
+
+            text:
+              caption,
+
+            files:
+              [file]
+          });
+
+
+          statusElement.textContent =
+            "Certificate sharing opened successfully.";
+
+          return;
+        }
+
+
+      } catch (error) {
+
+        /*
+         * User cancelling native share
+         * should not show an error.
+         */
+
+        if (
+          error?.name ===
+          "AbortError"
+        ) {
+
+          return;
+        }
+
+        console.warn(
+          "Native sharing unavailable:",
+          error
+        );
+
+      }
+
+
+      /*
+       * DESKTOP FALLBACK
+       *
+       * Open certificate and LinkedIn.
+       */
+
+      window.open(
+        mentor.certificateFile,
+        "_blank",
+        "noopener"
+      );
+
+
+      const linkedinUrl =
+        "https://www.linkedin.com/feed/?shareActive=true&text=" +
+        encodeURIComponent(
+          caption
+        );
+
+
+      window.open(
+        linkedinUrl,
+        "_blank",
+        "noopener"
+      );
+
+
+      statusElement.textContent =
+        "Certificate opened in a new tab. Attach it to your LinkedIn post with the pre-filled caption.";
+
+    };
+
+}
+
+
+
+/*
+ * FILE EXTENSION
+ */
+
 function getFileExtension(
   filename
 ) {
@@ -627,7 +959,9 @@ function getFileExtension(
 
 
   const extension =
-    parts[parts.length - 1];
+    parts[
+      parts.length - 1
+    ];
 
 
   if (
