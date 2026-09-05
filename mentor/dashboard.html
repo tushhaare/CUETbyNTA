@@ -1,34 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard | CUETbyNTA Mentors</title>
-  <link rel="stylesheet" href="css/mentor.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Dashboard | CUETbyNTA Mentors
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/mentor.css"
+  >
+
 </head>
+
 
 <body>
 
+
 <header class="topbar">
 
-  <a class="brand" href="dashboard.html">
+  <a
+    class="brand"
+    href="dashboard.html"
+  >
     CUET<span>byNTA</span>
   </a>
 
+
   <nav>
-    <span id="navMentorName" class="nav-name"></span>
-    <button id="logoutBtn" class="ghost-btn">
+
+    <span
+      id="navMentorName"
+      class="nav-name"
+    ></span>
+
+
+    <button
+      id="logoutBtn"
+      class="ghost-btn"
+    >
       Log out
     </button>
+
   </nav>
 
 </header>
 
 
+
 <main class="dashboard">
 
 
+  <!-- ================================= -->
   <!-- WELCOME -->
+  <!-- ================================= -->
 
   <section class="welcome">
 
@@ -38,20 +71,29 @@
         MENTORS' PORTAL
       </p>
 
+
       <h1>
-        Welcome, <span id="mentorName">Mentor</span>.
+        Welcome,
+        <span id="mentorName">
+          Mentor
+        </span>.
       </h1>
 
+
       <p class="muted">
-        Complete your identity verification to access your
-        mentorship documents.
+        Complete your identity verification to
+        access your mentorship documents.
       </p>
 
     </div>
 
+
     <div class="status-pill">
+
       <span></span>
+
       Mentor account active
+
     </div>
 
   </section>
@@ -73,20 +115,25 @@
         REQUIRED FIRST STEP
       </p>
 
+
       <h2>
         Verify your identity
       </h2>
 
+
       <p class="muted">
-        Submit a valid identity document to unlock your
-        CUETbyNTA mentorship documents.
+        Submit a valid identity document to unlock
+        your CUETbyNTA mentorship documents.
         Your document is stored privately.
       </p>
 
     </div>
 
 
-    <!-- FORM -->
+
+    <!-- =============================== -->
+    <!-- UPLOAD FORM -->
+    <!-- =============================== -->
 
     <div
       id="uploadArea"
@@ -95,9 +142,11 @@
 
       <form id="idUploadForm">
 
+
         <label for="idFile">
           Identity document
         </label>
+
 
         <input
           id="idFile"
@@ -106,12 +155,14 @@
           required
         >
 
+
         <p
           class="muted"
           style="font-size:12px;margin:8px 0 0;"
         >
           JPG, PNG or PDF · Maximum 5 MB
         </p>
+
 
 
         <label class="checkbox-row">
@@ -122,12 +173,17 @@
             required
           >
 
+
           <span>
-            I confirm that the uploaded ID belongs to me
-            and that the information provided is correct.
+
+            I confirm that the uploaded ID belongs
+            to me and that the information provided
+            is correct.
+
           </span>
 
         </label>
+
 
 
         <button
@@ -150,25 +206,34 @@
     </div>
 
 
-    <!-- LOCKED SUBMISSION VIEW -->
+
+    <!-- =============================== -->
+    <!-- SUBMITTED / LOCKED DOCUMENT -->
+    <!-- =============================== -->
 
     <div
       id="submittedArea"
       style="display:none;"
     >
 
+
       <div
         class="success-note"
         style="margin-bottom:16px;"
       >
-        ✓ Identity verification submitted successfully.
+
+        ✓ Identity verification submitted
+        successfully.
+
       </div>
+
 
 
       <div
         class="info-card"
         style="margin-top:0;"
       >
+
 
         <p
           class="eyebrow"
@@ -177,14 +242,18 @@
           SUBMITTED DOCUMENT
         </p>
 
+
         <h3 id="submittedFileName">
           Identity document
         </h3>
 
+
         <p class="muted">
-          Your identity document has been submitted and
-          is now locked. You cannot replace or submit
-          another document.
+
+          Your identity document has been submitted
+          and is now locked. You cannot replace or
+          submit another document.
+
         </p>
 
 
@@ -198,15 +267,22 @@
           View Submitted ID
         </a>
 
+
       </div>
 
     </div>
 
 
+
+    <!-- =============================== -->
+    <!-- STATUS -->
+    <!-- =============================== -->
+
     <div
       id="idVerificationStatus"
       style="margin-top:14px;"
     ></div>
+
 
   </section>
 
@@ -214,6 +290,7 @@
 
   <!-- ================================= -->
   <!-- DOCUMENTS -->
+  <!-- Hidden until ID submission -->
   <!-- ================================= -->
 
   <section
@@ -223,26 +300,36 @@
   >
 
 
+
+    <!-- =============================== -->
     <!-- LOR -->
+    <!-- =============================== -->
 
     <article class="document-card">
+
 
       <div class="card-icon">
         LOR
       </div>
 
+
       <p class="card-label">
         Letter of Recommendation
       </p>
+
 
       <h2>
         Your LOR
       </h2>
 
+
       <p class="muted">
-        Open your official Letter of Recommendation
-        in the PDF viewer.
+
+        Open your official Letter of
+        Recommendation in the browser PDF viewer.
+
       </p>
+
 
       <a
         id="lorLink"
@@ -254,33 +341,44 @@
         Open LOR
       </a>
 
+
     </article>
 
 
 
+    <!-- =============================== -->
     <!-- CERTIFICATE -->
+    <!-- =============================== -->
 
     <article class="document-card featured">
+
 
       <div class="card-icon">
         CERT
       </div>
 
+
       <p class="card-label">
         Mentorship Certificate
       </p>
+
 
       <h2>
         Your Certificate
       </h2>
 
+
       <p class="muted">
-        Open your official certificate in the PDF viewer,
-        or share it on LinkedIn.
+
+        Open your official certificate in the
+        browser PDF viewer or share it on LinkedIn.
+
       </p>
 
 
+
       <div class="button-row">
+
 
         <a
           id="certificateLink"
@@ -298,10 +396,12 @@
           class="secondary-btn small"
           type="button"
         >
-          Share on LinkedIn
+          Share Certificate on LinkedIn
         </button>
 
+
       </div>
+
 
 
       <p
@@ -311,30 +411,41 @@
         style="margin-top:10px;"
       ></p>
 
+
     </article>
 
 
 
+    <!-- =============================== -->
     <!-- PAYSLIP -->
+    <!-- =============================== -->
 
     <article class="document-card">
+
 
       <div class="card-icon">
         PAY
       </div>
 
+
       <p class="card-label">
         Payment
       </p>
+
 
       <h2>
         Your Payslip
       </h2>
 
+
       <p class="muted">
-        Your mentorship payment document will be
-        available here.
+
+        Your mentorship payment document will
+        be available here.
+
       </p>
+
+
 
       <div style="margin-top:20px;">
 
@@ -343,6 +454,7 @@
         </span>
 
       </div>
+
 
 
       <button
@@ -354,7 +466,9 @@
         Payslip Unavailable
       </button>
 
+
     </article>
+
 
   </section>
 
@@ -370,33 +484,45 @@
     style="display:none;"
   >
 
+
     <div>
+
 
       <p class="eyebrow">
         PUBLIC VERIFICATION
       </p>
 
+
       <h2>
         Your certificate can be verified online.
       </h2>
 
+
       <p class="muted">
-        This unique verification page can be converted
-        into a QR code and printed on your certificate.
+
+        This unique verification page can be
+        converted into a QR code and printed
+        on your certificate.
+
       </p>
+
 
     </div>
 
 
+
     <div class="verification-box">
+
 
       <span>
         Certificate ID
       </span>
 
+
       <strong id="certificateId">
         CBNTA-M-2026-001
       </strong>
+
 
       <a
         id="verificationLink"
@@ -407,7 +533,9 @@
         Open verification page →
       </a>
 
+
     </div>
+
 
   </section>
 
@@ -423,25 +551,32 @@
     style="display:none;"
   >
 
+
     <article class="document-card">
 
+
       <div class="section-heading">
+
 
         <p class="eyebrow">
           QUICK INFO
         </p>
 
+
         <h2>
           Your mentorship details
         </h2>
 
+
       </div>
+
 
 
       <div
         class="info-grid"
         style="margin-top:0;"
       >
+
 
         <div class="info-card">
 
@@ -457,6 +592,7 @@
           </p>
 
         </div>
+
 
 
         <div class="info-card">
@@ -475,6 +611,7 @@
         </div>
 
 
+
         <div class="info-card">
 
           <h3>
@@ -486,6 +623,7 @@
           </p>
 
         </div>
+
 
 
         <div class="info-card">
@@ -503,15 +641,20 @@
 
         </div>
 
+
       </div>
 
+
     </article>
+
 
   </section>
 
 
 
+  <!-- ================================= -->
   <!-- IMPORTANT -->
+  <!-- ================================= -->
 
   <section
     id="importantSection"
@@ -519,29 +662,43 @@
     style="display:none;margin-top:16px;"
   >
 
+
     <h3>
       Important
     </h3>
 
+
     <p class="muted">
+
       Please keep your account credentials private.
-      Your identity document is submitted securely for
-      CUETbyNTA verification and is not made public.
+      Your identity document is submitted securely
+      for CUETbyNTA verification and is not made public.
+
     </p>
+
 
   </section>
 
+
 </main>
 
+
+
+<!-- ================================= -->
+<!-- SCRIPTS -->
+<!-- ================================= -->
 
 <script
   type="module"
   src="js/auth.js"
 ></script>
 
+
 <script
   src="js/dashboard.js"
 ></script>
 
+
 </body>
+
 </html>
