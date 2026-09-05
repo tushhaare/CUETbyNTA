@@ -3,71 +3,71 @@ const MENTORS = {
   M001: {
     name: "Tushar",
     certificateId: "CBNTA-M-2026-001",
-    lorFile: "../../assets/mentors/M001/lor.pdf",
-    certificateFile: "../../assets/mentors/M001/certificate.pdf"
+    lorFile: "../../assets/mentors/M001/1.pdf",
+    certificateFile: "../../assets/mentors/M001/1.pdf"
   },
 
   M002: {
     name: "Archi",
     certificateId: "CBNTA-M-2026-002",
-    lorFile: "../../assets/mentors/M002/lor.pdf",
-    certificateFile: "../../assets/mentors/M002/certificate.pdf"
+    lorFile: "../../assets/mentors/M002/2.pdf",
+    certificateFile: "../../assets/mentors/M002/2.pdf"
   },
 
   M003: {
     name: "Ashish",
     certificateId: "CBNTA-M-2026-003",
-    lorFile: "../../assets/mentors/M003/lor.pdf",
-    certificateFile: "../../assets/mentors/M003/certificate.pdf"
+    lorFile: "../../assets/mentors/M003/3.pdf",
+    certificateFile: "../../assets/mentors/M003/3.pdf"
   },
 
   M004: {
     name: "Gauri",
     certificateId: "CBNTA-M-2026-004",
-    lorFile: "../../assets/mentors/M004/lor.pdf",
-    certificateFile: "../../assets/mentors/M004/certificate.pdf"
+    lorFile: "../../assets/mentors/M004/4.pdf",
+    certificateFile: "../../assets/mentors/M004/4.pdf"
   },
 
   M005: {
     name: "Jiya",
     certificateId: "CBNTA-M-2026-005",
-    lorFile: "../../assets/mentors/M005/lor.pdf",
-    certificateFile: "../../assets/mentors/M005/certificate.pdf"
+    lorFile: "../../assets/mentors/M005/5.pdf",
+    certificateFile: "../../assets/mentors/M005/5.pdf"
   },
 
   M006: {
     name: "Khushali",
     certificateId: "CBNTA-M-2026-006",
-    lorFile: "../../assets/mentors/M006/lor.pdf",
-    certificateFile: "../../assets/mentors/M006/certificate.pdf"
+    lorFile: "../../assets/mentors/M006/6.pdf",
+    certificateFile: "../../assets/mentors/M006/6.pdf"
   },
 
   M007: {
     name: "Meenakshi",
     certificateId: "CBNTA-M-2026-007",
-    lorFile: "../../assets/mentors/M007/lor.pdf",
-    certificateFile: "../../assets/mentors/M007/certificate.pdf"
+    lorFile: "../../assets/mentors/M007/7.pdf",
+    certificateFile: "../../assets/mentors/M007/7.pdf"
   },
 
   M008: {
     name: "Prince",
     certificateId: "CBNTA-M-2026-008",
-    lorFile: "../../assets/mentors/M008/lor.pdf",
-    certificateFile: "../../assets/mentors/M008/certificate.pdf"
+    lorFile: "../../assets/mentors/M008/8.pdf",
+    certificateFile: "../../assets/mentors/M008/8.pdf"
   },
 
   M009: {
     name: "Prince",
     certificateId: "CBNTA-M-2026-009",
-    lorFile: "../../assets/mentors/M009/lor.pdf",
-    certificateFile: "../../assets/mentors/M009/certificate.pdf"
+    lorFile: "../../assets/mentors/M009/9.pdf",
+    certificateFile: "../../assets/mentors/M009/9.pdf"
   },
 
   M010: {
     name: "Purvi",
     certificateId: "CBNTA-M-2026-010",
-    lorFile: "../../assets/mentors/M010/lor.pdf",
-    certificateFile: "../../assets/mentors/M010/certificate.pdf"
+    lorFile: "../../assets/mentors/M010/10.pdf",
+    certificateFile: "../../assets/mentors/M010/10.pdf"
   }
 
 };
