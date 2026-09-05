@@ -935,11 +935,10 @@ function setupLinkedInSharing(
    */
 
   const caption =
-    `Proud to have completed my 10-month mentorship journey with CUETbyNTA as a Mentor.\n\n` +
+    `Proud to have completed my journey with CUETbyNTA as a Mentor.\n\n` +
     `It was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\n\n` +
     `Thank you, CUETbyNTA, for the opportunity.\n\n` +
-    `#CUETbyNTA #CUET #Mentorship #Education\n\n` +
-    `CUETbyNTA: https://www.linkedin.com/company/cuetbynta`;
+    `#CUETbyNTA #CUET #Mentorship #Education`;
 
 
   button.textContent =
