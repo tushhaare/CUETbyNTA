@@ -77,7 +77,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const sessionMentor = getCurrentMentor();
 
-  if (!sessionMentor) return;
+  if (!sessionMentor) {
+    window.location.href = "login.html";
+    return;
+  }
+
 
   const mentor = MENTORS[sessionMentor.mentorId];
 
@@ -87,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
 
-  /* BASIC DASHBOARD */
+  /* BASIC INFORMATION */
 
   document.getElementById("mentorName").textContent =
     mentor.name;
@@ -105,55 +109,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     mentor.certificateId;
 
 
-  const lor =
-    document.getElementById("lorLink");
+  /*
+   * IMPORTANT:
+   * Do not unlock anything until Supabase
+   * confirms the ID submission.
+   */
 
-  const certificate =
-    document.getElementById("certificateLink");
-
-  const verification =
-    document.getElementById("verificationLink");
-
-  const linkedin =
-    document.getElementById("linkedinLink");
-
-
-  lor.href = mentor.lorFile;
-
-  certificate.href = mentor.certificateFile;
-
-  verification.href =
-    `../../verify/?id=${mentor.certificateId}`;
-
-
-  /* LINKEDIN */
-
-  const linkedinText =
-    `Proud to have completed my mentorship journey with CUETbyNTA as a Mentor.\n\n` +
-    `It was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\n\n` +
-    `Thank you, CUETbyNTA, for the opportunity.\n\n` +
-    `#CUETbyNTA #CUET #Mentorship #Education`;
-
-  linkedin.href =
-    "https://www.linkedin.com/feed/?shareActive=true&text=" +
-    encodeURIComponent(linkedinText);
-
-
-  /* ID VERIFICATION */
-
-  setupIdentityVerification();
+  await setupIdentityVerification(mentor);
 
 });
 
 
-async function setupIdentityVerification() {
+async function setupIdentityVerification(mentor) {
 
   const supabase = window.cbntaSupabase;
 
   if (!supabase) {
-    console.error("Supabase client unavailable.");
+
+    console.error(
+      "Supabase client unavailable."
+    );
+
     return;
   }
+
+
+  const identitySection =
+    document.getElementById("identitySection");
+
+  const documentsSection =
+    document.getElementById("documentsSection");
+
+  const verificationSection =
+    document.getElementById("verificationSection");
+
+  const infoSection =
+    document.getElementById("infoSection");
+
+  const importantSection =
+    document.getElementById("importantSection");
 
 
   const form =
@@ -178,240 +172,492 @@ async function setupIdentityVerification() {
     document.getElementById("idStatusInfo");
 
 
-  /* GET CURRENT USER */
+  /*
+   * GET CURRENT SESSION
+   */
 
   const {
     data: sessionData,
     error: sessionError
   } = await supabase.auth.getSession();
 
-  if (sessionError || !sessionData.session) {
+
+  if (
+    sessionError ||
+    !sessionData.session
+  ) {
+
     window.location.href = "login.html";
+
     return;
   }
 
-  const user = sessionData.session.user;
 
-  const mentorData = getCurrentMentor();
-
-  if (!mentorData) return;
+  const user =
+    sessionData.session.user;
 
 
-  /* LOAD EXISTING SUBMISSION */
+  const mentorData =
+    getCurrentMentor();
+
+
+  if (!mentorData) {
+
+    window.location.href =
+      "login.html";
+
+    return;
+  }
+
+
+  /*
+   * CHECK EXISTING ID SUBMISSION
+   */
 
   const {
     data: existing,
     error: existingError
   } = await supabase
     .from("mentor_id_documents")
-    .select("status, signoff, signed_off_at, updated_at")
-    .eq("mentor_user_id", user.id)
+    .select(
+      "status, signoff, signed_off_at, updated_at"
+    )
+    .eq(
+      "mentor_user_id",
+      user.id
+    )
     .maybeSingle();
 
 
-  if (!existingError && existing) {
+  if (existingError) {
 
-    statusInfo.textContent =
-      existing.status === "submitted"
-        ? "Submitted"
-        : existing.status;
+    console.error(
+      "Could not check ID verification:",
+      existingError
+    );
 
-    if (existing.signoff) {
+    status.textContent =
+      "Unable to check your verification status. Please refresh and try again.";
 
-      statusBox.innerHTML =
-        `<div class="success-note">
-          ✓ ID submitted successfully and sign-off recorded.
-        </div>`;
+    return;
+  }
 
-    }
+
+  /*
+   * UNLOCK FUNCTION
+   */
+
+  function unlockDocuments() {
+
+    documentsSection.style.display =
+      "grid";
+
+    verificationSection.style.display =
+      "grid";
+
+    infoSection.style.display =
+      "grid";
+
+    importantSection.style.display =
+      "block";
+
+    identitySection.style.display =
+      "block";
+
+
+    const lor =
+      document.getElementById("lorLink");
+
+    const certificate =
+      document.getElementById(
+        "certificateLink"
+      );
+
+    const verification =
+      document.getElementById(
+        "verificationLink"
+      );
+
+    const linkedin =
+      document.getElementById(
+        "linkedinLink"
+      );
+
+
+    /*
+     * PDF VIEWER
+     *
+     * No download attribute.
+     * Browser opens the PDF viewer.
+     */
+
+    lor.href =
+      mentor.lorFile;
+
+
+    certificate.href =
+      mentor.certificateFile;
+
+
+    verification.href =
+      `../../verify/?id=${mentor.certificateId}`;
+
+
+    /*
+     * LINKEDIN
+     */
+
+    const linkedinText =
+      `Proud to have completed my mentorship journey with CUETbyNTA as a Mentor.\n\n` +
+      `It was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\n\n` +
+      `Thank you, CUETbyNTA, for the opportunity.\n\n` +
+      `#CUETbyNTA #CUET #Mentorship #Education`;
+
+
+    linkedin.href =
+      "https://www.linkedin.com/feed/?shareActive=true&text=" +
+      encodeURIComponent(
+        linkedinText
+      );
 
   }
 
 
-  /* SUBMIT */
+  /*
+   * EXISTING SUBMISSION
+   */
 
-  form.addEventListener("submit", async (event) => {
+  if (
+    existing &&
+    existing.signoff === true &&
+    (
+      existing.status === "submitted" ||
+      existing.status === "approved"
+    )
+  ) {
 
-    event.preventDefault();
-
-    status.textContent = "";
-
-
-    const file = fileInput.files[0];
-
-    if (!file) {
-      status.textContent =
-        "Please select your identity document.";
-      return;
-    }
-
-
-    /* SIZE CHECK */
-
-    const maxSize =
-      5 * 1024 * 1024;
-
-    if (file.size > maxSize) {
-
-      status.textContent =
-        "File is too large. Maximum size is 5 MB.";
-
-      return;
-    }
+    statusInfo.textContent =
+      existing.status === "approved"
+        ? "Approved"
+        : "Submitted";
 
 
-    /* TYPE CHECK */
-
-    const allowedTypes = [
-      "image/jpeg",
-      "image/png",
-      "application/pdf"
-    ];
-
-    if (!allowedTypes.includes(file.type)) {
-
-      status.textContent =
-        "Only JPG, PNG or PDF files are allowed.";
-
-      return;
-    }
+    statusBox.innerHTML =
+      `<div class="success-note">
+        ✓ Your identity has been submitted successfully.
+        Your mentorship documents are now available.
+      </div>`;
 
 
-    if (!signoff.checked) {
+    unlockDocuments();
 
-      status.textContent =
-        "Please confirm the sign-off before submitting.";
-
-      return;
-    }
+    return;
+  }
 
 
-    submitBtn.disabled = true;
+  /*
+   * NO SUBMISSION
+   *
+   * Documents stay hidden.
+   */
 
-    submitBtn.textContent =
-      "Uploading...";
+  documentsSection.style.display =
+    "none";
 
+  verificationSection.style.display =
+    "none";
 
-    try {
+  infoSection.style.display =
+    "none";
 
-      const extension =
-        getFileExtension(file.name);
-
-      const filePath =
-        `${user.id}/identity.${extension}`;
-
-
-      /* UPLOAD TO PRIVATE BUCKET */
-
-      const {
-        error: uploadError
-      } = await supabase
-        .storage
-        .from("mentor-id-documents")
-        .upload(
-          filePath,
-          file,
-          {
-            upsert: true,
-            contentType: file.type
-          }
-        );
+  importantSection.style.display =
+    "none";
 
 
-      if (uploadError) {
-        throw uploadError;
-      }
+  statusInfo.textContent =
+    "Not submitted";
 
 
-      /* SAVE SUBMISSION RECORD */
+  /*
+   * SUBMIT ID
+   */
 
-      const {
-        error: databaseError
-      } = await supabase
-        .from("mentor_id_documents")
-        .upsert(
-          {
-            mentor_user_id: user.id,
-            mentor_id: mentorData.mentorId,
-            file_path: filePath,
-            status: "submitted",
-            signoff: true,
-            signed_off_at:
-              new Date().toISOString(),
-            updated_at:
-              new Date().toISOString()
-          },
-          {
-            onConflict: "mentor_user_id"
-          }
-        );
+  form.addEventListener(
+    "submit",
+    async (event) => {
 
-
-      if (databaseError) {
-        throw databaseError;
-      }
-
-
-      /* SUCCESS */
+      event.preventDefault();
 
       status.textContent = "";
 
-      statusBox.innerHTML =
-        `<div class="success-note">
-          ✓ Your ID has been submitted successfully.
-          Your sign-off has been recorded.
-        </div>`;
 
-      statusInfo.textContent =
-        "Submitted";
+      const file =
+        fileInput.files[0];
 
-      fileInput.value = "";
 
-      signoff.checked = false;
+      if (!file) {
 
-    } catch (error) {
+        status.textContent =
+          "Please select your identity document.";
 
-      console.error(error);
+        return;
+      }
 
-      status.textContent =
-        "Something went wrong while uploading your ID. Please try again.";
 
-    } finally {
+      /*
+       * SIZE
+       */
 
-      submitBtn.disabled = false;
+      const maxSize =
+        5 * 1024 * 1024;
+
+
+      if (
+        file.size > maxSize
+      ) {
+
+        status.textContent =
+          "File is too large. Maximum size is 5 MB.";
+
+        return;
+      }
+
+
+      /*
+       * TYPE
+       */
+
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "application/pdf"
+      ];
+
+
+      if (
+        !allowedTypes.includes(
+          file.type
+        )
+      ) {
+
+        status.textContent =
+          "Only JPG, PNG or PDF files are allowed.";
+
+        return;
+      }
+
+
+      /*
+       * SIGN-OFF
+       */
+
+      if (
+        !signoff.checked
+      ) {
+
+        status.textContent =
+          "Please confirm the sign-off before submitting.";
+
+        return;
+      }
+
+
+      submitBtn.disabled =
+        true;
 
       submitBtn.textContent =
-        "Submit ID for Verification";
+        "Uploading...";
+
+
+      try {
+
+        /*
+         * FILE PATH
+         */
+
+        const extension =
+          getFileExtension(
+            file.name
+          );
+
+
+        const filePath =
+          `${user.id}/identity.${extension}`;
+
+
+        /*
+         * PRIVATE STORAGE UPLOAD
+         */
+
+        const {
+          error: uploadError
+        } = await supabase
+          .storage
+          .from(
+            "mentor-id-documents"
+          )
+          .upload(
+            filePath,
+            file,
+            {
+              upsert: true,
+              contentType: file.type
+            }
+          );
+
+
+        if (uploadError) {
+          throw uploadError;
+        }
+
+
+        /*
+         * DATABASE RECORD
+         */
+
+        const {
+          error: databaseError
+        } = await supabase
+          .from(
+            "mentor_id_documents"
+          )
+          .upsert(
+            {
+              mentor_user_id:
+                user.id,
+
+              mentor_id:
+                mentorData.mentorId,
+
+              file_path:
+                filePath,
+
+              status:
+                "submitted",
+
+              signoff:
+                true,
+
+              signed_off_at:
+                new Date().toISOString(),
+
+              updated_at:
+                new Date().toISOString()
+            },
+            {
+              onConflict:
+                "mentor_user_id"
+            }
+          );
+
+
+        if (databaseError) {
+          throw databaseError;
+        }
+
+
+        /*
+         * SUCCESS
+         */
+
+        status.textContent =
+          "";
+
+
+        statusBox.innerHTML =
+          `<div class="success-note">
+            ✓ Identity verification submitted successfully.
+            Your mentorship documents are now available.
+          </div>`;
+
+
+        statusInfo.textContent =
+          "Submitted";
+
+
+        fileInput.value =
+          "";
+
+        signoff.checked =
+          false;
+
+
+        /*
+         * NOW UNLOCK DOCUMENTS
+         */
+
+        unlockDocuments();
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        status.textContent =
+          "Something went wrong while uploading your ID. Please try again.";
+
+
+      } finally {
+
+        submitBtn.disabled =
+          false;
+
+        submitBtn.textContent =
+          "Submit ID for Verification";
+
+      }
 
     }
-
-  });
+  );
 
 }
 
 
-function getFileExtension(filename) {
+function getFileExtension(
+  filename
+) {
 
   const parts =
-    filename.toLowerCase().split(".");
+    filename
+      .toLowerCase()
+      .split(".");
+
 
   const extension =
     parts[parts.length - 1];
+
 
   if (
     extension === "jpg" ||
     extension === "jpeg"
   ) {
+
     return "jpg";
+
   }
 
-  if (extension === "png") {
+
+  if (
+    extension === "png"
+  ) {
+
     return "png";
+
   }
 
-  if (extension === "pdf") {
+
+  if (
+    extension === "pdf"
+  ) {
+
     return "pdf";
+
   }
+
 
   return "bin";
+
 }
