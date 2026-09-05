@@ -10,45 +10,62 @@
 <body>
 
 <header class="topbar">
+
   <a class="brand" href="dashboard.html">
     CUET<span>byNTA</span>
   </a>
 
   <nav>
     <span id="navMentorName" class="nav-name"></span>
-    <button id="logoutBtn" class="ghost-btn">Log out</button>
+    <button id="logoutBtn" class="ghost-btn">
+      Log out
+    </button>
   </nav>
+
 </header>
 
 
 <main class="dashboard">
 
+
   <!-- WELCOME -->
+
   <section class="welcome">
+
     <div>
-      <p class="eyebrow">MENTORS' PORTAL</p>
+
+      <p class="eyebrow">
+        MENTORS' PORTAL
+      </p>
 
       <h1>
         Welcome, <span id="mentorName">Mentor</span>.
       </h1>
 
       <p class="muted">
-        Complete your identity verification to access your mentorship documents.
+        Complete your identity verification to access your
+        mentorship documents.
       </p>
+
     </div>
 
     <div class="status-pill">
       <span></span>
       Mentor account active
     </div>
+
   </section>
 
 
-  <!-- ============================= -->
-  <!-- ID VERIFICATION -->
-  <!-- ============================= -->
 
-  <section id="identitySection" class="document-card">
+  <!-- ================================= -->
+  <!-- IDENTITY VERIFICATION -->
+  <!-- ================================= -->
+
+  <section
+    id="identitySection"
+    class="document-card"
+  >
 
     <div class="section-heading">
 
@@ -61,15 +78,20 @@
       </h2>
 
       <p class="muted">
-        Please submit a valid identity document before accessing your
-        Letter of Recommendation and certificate.
-        Your document is stored privately and is not publicly accessible.
+        Submit a valid identity document to unlock your
+        CUETbyNTA mentorship documents.
+        Your document is stored privately.
       </p>
 
     </div>
 
 
-    <div class="upload-zone">
+    <!-- FORM -->
+
+    <div
+      id="uploadArea"
+      class="upload-zone"
+    >
 
       <form id="idUploadForm">
 
@@ -128,6 +150,59 @@
     </div>
 
 
+    <!-- LOCKED SUBMISSION VIEW -->
+
+    <div
+      id="submittedArea"
+      style="display:none;"
+    >
+
+      <div
+        class="success-note"
+        style="margin-bottom:16px;"
+      >
+        ✓ Identity verification submitted successfully.
+      </div>
+
+
+      <div
+        class="info-card"
+        style="margin-top:0;"
+      >
+
+        <p
+          class="eyebrow"
+          style="margin-bottom:8px;"
+        >
+          SUBMITTED DOCUMENT
+        </p>
+
+        <h3 id="submittedFileName">
+          Identity document
+        </h3>
+
+        <p class="muted">
+          Your identity document has been submitted and
+          is now locked. You cannot replace or submit
+          another document.
+        </p>
+
+
+        <a
+          id="viewSubmittedId"
+          class="secondary-btn small"
+          href="#"
+          target="_blank"
+          rel="noopener"
+        >
+          View Submitted ID
+        </a>
+
+      </div>
+
+    </div>
+
+
     <div
       id="idVerificationStatus"
       style="margin-top:14px;"
@@ -136,16 +211,17 @@
   </section>
 
 
-  <!-- ============================= -->
+
+  <!-- ================================= -->
   <!-- DOCUMENTS -->
-  <!-- Hidden until ID is submitted -->
-  <!-- ============================= -->
+  <!-- ================================= -->
 
   <section
     id="documentsSection"
     class="document-grid"
     style="display:none;"
   >
+
 
     <!-- LOR -->
 
@@ -164,7 +240,8 @@
       </h2>
 
       <p class="muted">
-        Open your official Letter of Recommendation in the PDF viewer.
+        Open your official Letter of Recommendation
+        in the PDF viewer.
       </p>
 
       <a
@@ -178,6 +255,7 @@
       </a>
 
     </article>
+
 
 
     <!-- CERTIFICATE -->
@@ -197,8 +275,8 @@
       </h2>
 
       <p class="muted">
-        Open your official certificate in the PDF viewer.
-        You can print or download it from there.
+        Open your official certificate in the PDF viewer,
+        or share it on LinkedIn.
       </p>
 
 
@@ -215,19 +293,26 @@
         </a>
 
 
-        <a
+        <button
           id="linkedinLink"
           class="secondary-btn small"
-          href="#"
-          target="_blank"
-          rel="noopener"
+          type="button"
         >
           Share on LinkedIn
-        </a>
+        </button>
 
       </div>
 
+
+      <p
+        id="linkedinStatus"
+        class="form-message"
+        role="status"
+        style="margin-top:10px;"
+      ></p>
+
     </article>
+
 
 
     <!-- PAYSLIP -->
@@ -247,7 +332,8 @@
       </h2>
 
       <p class="muted">
-        Your mentorship payment document will be available here.
+        Your mentorship payment document will be
+        available here.
       </p>
 
       <div style="margin-top:20px;">
@@ -273,9 +359,10 @@
   </section>
 
 
-  <!-- ============================= -->
+
+  <!-- ================================= -->
   <!-- PUBLIC VERIFICATION -->
-  <!-- ============================= -->
+  <!-- ================================= -->
 
   <section
     id="verificationSection"
@@ -294,8 +381,8 @@
       </h2>
 
       <p class="muted">
-        This unique verification page can be converted into a QR code
-        and printed on your certificate.
+        This unique verification page can be converted
+        into a QR code and printed on your certificate.
       </p>
 
     </div>
@@ -325,9 +412,10 @@
   </section>
 
 
-  <!-- ============================= -->
+
+  <!-- ================================= -->
   <!-- QUICK INFO -->
-  <!-- ============================= -->
+  <!-- ================================= -->
 
   <section
     id="infoSection"
@@ -422,7 +510,8 @@
   </section>
 
 
-  <!-- IMPORTANT NOTE -->
+
+  <!-- IMPORTANT -->
 
   <section
     id="importantSection"
