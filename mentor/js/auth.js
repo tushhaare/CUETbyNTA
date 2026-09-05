@@ -84,7 +84,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /* FORGOT PASSWORD */
 
+  const forgotPassword = document.getElementById("forgotPassword");
+
+  if (forgotPassword) {
+    forgotPassword.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.location.href = "reset-password.html";
+    });
+  }
   /* LOGOUT */
 
   const logoutBtn = document.getElementById("logoutBtn");
