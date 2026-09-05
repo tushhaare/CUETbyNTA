@@ -106,6 +106,10 @@ document.addEventListener(
     }
 
 
+    /*
+     * BASIC INFORMATION
+     */
+
     document.getElementById(
       "mentorName"
     ).textContent =
@@ -136,6 +140,10 @@ document.addEventListener(
       mentor.certificateId;
 
 
+    /*
+     * ID VERIFICATION IS THE GATE.
+     */
+
     await setupIdentityVerification(
       mentor
     );
@@ -162,6 +170,10 @@ async function setupIdentityVerification(
     return;
   }
 
+
+  /*
+   * ELEMENTS
+   */
 
   const identitySection =
     document.getElementById(
@@ -271,8 +283,9 @@ async function setupIdentityVerification(
     );
 
 
+
   /*
-   * SESSION
+   * GET CURRENT SESSION
    */
 
   const {
@@ -313,7 +326,7 @@ async function setupIdentityVerification(
 
 
   /*
-   * CHECK SUBMISSION
+   * CHECK EXISTING ID SUBMISSION
    */
 
   const {
@@ -350,7 +363,7 @@ async function setupIdentityVerification(
 
 
   /*
-   * SHOW DOCUMENTS
+   * UNLOCK DOCUMENTS
    */
 
   function unlockDocuments() {
@@ -371,11 +384,32 @@ async function setupIdentityVerification(
       "block";
 
 
+    /*
+     * LOR
+     */
+
     const lor =
       document.getElementById(
         "lorLink"
       );
 
+
+    lor.href =
+      mentor.lorFile;
+
+
+    lor.target =
+      "_blank";
+
+
+    lor.removeAttribute(
+      "download"
+    );
+
+
+    /*
+     * CERTIFICATE
+     */
 
     const certificate =
       document.getElementById(
@@ -383,22 +417,27 @@ async function setupIdentityVerification(
       );
 
 
+    certificate.href =
+      mentor.certificateFile;
+
+
+    certificate.target =
+      "_blank";
+
+
+    certificate.removeAttribute(
+      "download"
+    );
+
+
+    /*
+     * PUBLIC VERIFICATION
+     */
+
     const verification =
       document.getElementById(
         "verificationLink"
       );
-
-
-    /*
-     * PDF VIEWER
-     */
-
-    lor.href =
-      mentor.lorFile;
-
-
-    certificate.href =
-      mentor.certificateFile;
 
 
     verification.href =
@@ -420,20 +459,36 @@ async function setupIdentityVerification(
 
 
   /*
-   * SHOW LOCKED SUBMISSION
+   * SHOW SUBMITTED DOCUMENT
    */
 
   async function showSubmittedDocument(
     record
   ) {
 
-    uploadArea.style.display =
-      "none";
+    /*
+     * Hide upload form permanently.
+     */
+
+    if (uploadArea) {
+
+      uploadArea.style.display =
+        "none";
+
+    }
 
 
-    submittedArea.style.display =
-      "block";
+    if (submittedArea) {
 
+      submittedArea.style.display =
+        "block";
+
+    }
+
+
+    /*
+     * Status
+     */
 
     statusInfo.textContent =
       record.status === "approved"
@@ -448,7 +503,7 @@ async function setupIdentityVerification(
 
 
     /*
-     * FILE NAME
+     * File name
      */
 
     const path =
@@ -460,57 +515,71 @@ async function setupIdentityVerification(
       "Identity document";
 
 
-    submittedFileName.textContent =
-      filename;
+    if (submittedFileName) {
 
-
-    /*
-     * TEMPORARY VIEW URL
-     *
-     * Valid for 10 minutes.
-     */
-
-    const {
-      data: signedUrlData,
-      error: signedUrlError
-    } =
-      await supabase
-        .storage
-        .from(
-          "mentor-id-documents"
-        )
-        .createSignedUrl(
-          record.file_path,
-          600
-        );
-
-
-    if (
-      !signedUrlError &&
-      signedUrlData?.signedUrl
-    ) {
-
-      viewSubmittedId.href =
-        signedUrlData.signedUrl;
-
-      viewSubmittedId.style.display =
-        "inline-flex";
-
-    } else {
-
-      viewSubmittedId.style.display =
-        "none";
-
-      console.error(
-        "Could not create secure ID view URL:",
-        signedUrlError
-      );
+      submittedFileName.textContent =
+        filename;
 
     }
 
 
     /*
-     * UNLOCK OTHER DOCUMENTS
+     * Create a temporary private URL.
+     *
+     * The Supabase bucket remains private.
+     */
+
+    if (
+      record.file_path &&
+      viewSubmittedId
+    ) {
+
+      const {
+        data: signedUrlData,
+        error: signedUrlError
+      } =
+        await supabase
+          .storage
+          .from(
+            "mentor-id-documents"
+          )
+          .createSignedUrl(
+            record.file_path,
+            600
+          );
+
+
+      if (
+        !signedUrlError &&
+        signedUrlData?.signedUrl
+      ) {
+
+        viewSubmittedId.href =
+          signedUrlData.signedUrl;
+
+        viewSubmittedId.target =
+          "_blank";
+
+        viewSubmittedId.style.display =
+          "inline-flex";
+
+      } else {
+
+        viewSubmittedId.style.display =
+          "none";
+
+        console.error(
+          "Could not create secure ID view URL:",
+          signedUrlError
+        );
+
+      }
+
+    }
+
+
+    /*
+     * Unlock the rest of dashboard.
      */
 
     unlockDocuments();
@@ -543,14 +612,24 @@ async function setupIdentityVerification(
 
   /*
    * NO SUBMISSION
+   *
+   * Keep everything else locked.
    */
 
-  uploadArea.style.display =
-    "block";
+  if (uploadArea) {
+
+    uploadArea.style.display =
+      "block";
+
+  }
 
 
-  submittedArea.style.display =
-    "none";
+  if (submittedArea) {
+
+    submittedArea.style.display =
+      "none";
+
+  }
 
 
   documentsSection.style.display =
@@ -584,6 +663,7 @@ async function setupIdentityVerification(
 
       event.preventDefault();
 
+
       status.textContent =
         "";
 
@@ -591,6 +671,10 @@ async function setupIdentityVerification(
       const file =
         fileInput.files[0];
 
+
+      /*
+       * FILE REQUIRED
+       */
 
       if (!file) {
 
@@ -602,7 +686,7 @@ async function setupIdentityVerification(
 
 
       /*
-       * SIZE
+       * MAXIMUM 5 MB
        */
 
       const maxSize =
@@ -621,7 +705,7 @@ async function setupIdentityVerification(
 
 
       /*
-       * TYPE
+       * ALLOWED TYPES
        */
 
       const allowedTypes = [
@@ -645,7 +729,7 @@ async function setupIdentityVerification(
 
 
       /*
-       * SIGN-OFF
+       * SIGN-OFF REQUIRED
        */
 
       if (
@@ -659,6 +743,10 @@ async function setupIdentityVerification(
       }
 
 
+      /*
+       * LOCK BUTTON WHILE UPLOADING
+       */
+
       submitBtn.disabled =
         true;
 
@@ -669,11 +757,19 @@ async function setupIdentityVerification(
 
       try {
 
+        /*
+         * FILE EXTENSION
+         */
+
         const extension =
           getFileExtension(
             file.name
           );
 
+
+        /*
+         * PRIVATE STORAGE PATH
+         */
 
         const filePath =
           `${user.id}/identity.${extension}`;
@@ -681,6 +777,10 @@ async function setupIdentityVerification(
 
         /*
          * UPLOAD
+         *
+         * IMPORTANT:
+         * upsert:false prevents replacing
+         * an existing document.
          */
 
         const {
@@ -703,12 +803,14 @@ async function setupIdentityVerification(
 
 
         if (uploadError) {
+
           throw uploadError;
+
         }
 
 
         /*
-         * DATABASE
+         * CREATE DATABASE RECORD
          */
 
         const {
@@ -719,6 +821,7 @@ async function setupIdentityVerification(
               "mentor_id_documents"
             )
             .insert({
+
               mentor_user_id:
                 user.id,
 
@@ -739,19 +842,36 @@ async function setupIdentityVerification(
 
               updated_at:
                 new Date().toISOString()
+
             });
 
 
         if (databaseError) {
+
           throw databaseError;
+
         }
 
 
         /*
-         * LOCK IMMEDIATELY
+         * SUCCESS
+         */
+
+        status.textContent =
+          "";
+
+
+        statusInfo.textContent =
+          "Submitted";
+
+
+        /*
+         * Lock the upload area
+         * and show submitted document.
          */
 
         await showSubmittedDocument({
+
           file_path:
             filePath,
 
@@ -760,12 +880,14 @@ async function setupIdentityVerification(
 
           signoff:
             true
+
         });
 
 
       } catch (error) {
 
         console.error(
+          "ID submission error:",
           error
         );
 
@@ -778,6 +900,7 @@ async function setupIdentityVerification(
 
         submitBtn.disabled =
           false;
+
 
         submitBtn.textContent =
           "Submit ID for Verification";
@@ -792,7 +915,9 @@ async function setupIdentityVerification(
 
 
 /*
- * LINKEDIN SHARING
+ * =========================================
+ * LINKEDIN — PHONE FIRST
+ * =========================================
  */
 
 function setupLinkedInSharing(
@@ -813,18 +938,26 @@ function setupLinkedInSharing(
     `#CUETbyNTA #CUET #Mentorship #Education`;
 
 
+  button.textContent =
+    "Share Certificate on LinkedIn";
+
+
   button.onclick =
     async () => {
 
       statusElement.textContent =
-        "";
+        "Preparing your certificate...";
 
 
-      /*
-       * Try native file sharing first.
-       */
+      button.disabled =
+        true;
+
 
       try {
+
+        /*
+         * Fetch certificate PDF.
+         */
 
         const response =
           await fetch(
@@ -833,9 +966,11 @@ function setupLinkedInSharing(
 
 
         if (!response.ok) {
+
           throw new Error(
             "Certificate could not be loaded."
           );
+
         }
 
 
@@ -843,7 +978,11 @@ function setupLinkedInSharing(
           await response.blob();
 
 
-        const file =
+        /*
+         * Convert PDF into a File.
+         */
+
+        const certificateFile =
           new File(
             [blob],
             "CUETbyNTA-Certificate.pdf",
@@ -855,18 +994,32 @@ function setupLinkedInSharing(
 
 
         /*
-         * Browser / mobile share sheet
+         * =================================
+         * NATIVE PHONE SHARE
+         * =================================
+         *
+         * This is the primary route.
+         *
+         * On supported Android/iPhone
+         * browsers the operating system's
+         * share sheet will appear.
          */
 
         if (
           navigator.share &&
           navigator.canShare &&
           navigator.canShare({
-            files: [file]
+            files:
+              [certificateFile]
           })
         ) {
 
+          statusElement.textContent =
+            "Opening your phone's share options...";
+
+
           await navigator.share({
+
             title:
               "CUETbyNTA Mentorship Certificate",
 
@@ -874,22 +1027,80 @@ function setupLinkedInSharing(
               caption,
 
             files:
-              [file]
+              [certificateFile]
+
           });
 
 
           statusElement.textContent =
-            "Certificate sharing opened successfully.";
+            "Certificate ready to share.";
 
           return;
         }
 
 
-      } catch (error) {
 
         /*
-         * User cancelling native share
-         * should not show an error.
+         * =================================
+         * BROWSER FALLBACK
+         * =================================
+         */
+
+        const certificateUrl =
+          new URL(
+            mentor.certificateFile,
+            window.location.href
+          ).href;
+
+
+        /*
+         * Open certificate.
+         */
+
+        window.open(
+          certificateUrl,
+          "_blank"
+        );
+
+
+        /*
+         * Open LinkedIn with caption.
+         */
+
+        const linkedinUrl =
+          "https://www.linkedin.com/feed/?shareActive=true&text=" +
+          encodeURIComponent(
+            caption
+          );
+
+
+        setTimeout(
+          () => {
+
+            window.open(
+              linkedinUrl,
+              "_blank"
+            );
+
+          },
+          500
+        );
+
+
+        statusElement.textContent =
+          "Certificate opened. Attach it to your LinkedIn post and publish.";
+
+
+      } catch (error) {
+
+        console.error(
+          "LinkedIn sharing error:",
+          error
+        );
+
+
+        /*
+         * User cancelled native share.
          */
 
         if (
@@ -897,46 +1108,22 @@ function setupLinkedInSharing(
           "AbortError"
         ) {
 
+          statusElement.textContent =
+            "";
+
           return;
         }
 
-        console.warn(
-          "Native sharing unavailable:",
-          error
-        );
+
+        statusElement.textContent =
+          "Unable to open sharing. Please open your certificate and share it manually.";
+
+      } finally {
+
+        button.disabled =
+          false;
 
       }
-
-
-      /*
-       * DESKTOP FALLBACK
-       *
-       * Open certificate and LinkedIn.
-       */
-
-      window.open(
-        mentor.certificateFile,
-        "_blank",
-        "noopener"
-      );
-
-
-      const linkedinUrl =
-        "https://www.linkedin.com/feed/?shareActive=true&text=" +
-        encodeURIComponent(
-          caption
-        );
-
-
-      window.open(
-        linkedinUrl,
-        "_blank",
-        "noopener"
-      );
-
-
-      statusElement.textContent =
-        "Certificate opened in a new tab. Attach it to your LinkedIn post with the pre-filled caption.";
 
     };
 
@@ -945,7 +1132,9 @@ function setupLinkedInSharing(
 
 
 /*
+ * =========================================
  * FILE EXTENSION
+ * =========================================
  */
 
 function getFileExtension(
