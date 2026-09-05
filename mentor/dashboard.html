@@ -20,6 +20,7 @@
   </nav>
 </header>
 
+
 <main class="dashboard">
 
   <!-- WELCOME -->
@@ -32,7 +33,7 @@
       </h1>
 
       <p class="muted">
-        Everything related to your CUETbyNTA mentorship credentials is here.
+        Complete your identity verification to access your mentorship documents.
       </p>
     </div>
 
@@ -43,50 +44,163 @@
   </section>
 
 
+  <!-- ============================= -->
+  <!-- ID VERIFICATION -->
+  <!-- ============================= -->
+
+  <section id="identitySection" class="document-card">
+
+    <div class="section-heading">
+
+      <p class="eyebrow">
+        REQUIRED FIRST STEP
+      </p>
+
+      <h2>
+        Verify your identity
+      </h2>
+
+      <p class="muted">
+        Please submit a valid identity document before accessing your
+        Letter of Recommendation and certificate.
+        Your document is stored privately and is not publicly accessible.
+      </p>
+
+    </div>
+
+
+    <div class="upload-zone">
+
+      <form id="idUploadForm">
+
+        <label for="idFile">
+          Identity document
+        </label>
+
+        <input
+          id="idFile"
+          type="file"
+          accept="image/jpeg,image/png,application/pdf"
+          required
+        >
+
+        <p
+          class="muted"
+          style="font-size:12px;margin:8px 0 0;"
+        >
+          JPG, PNG or PDF · Maximum 5 MB
+        </p>
+
+
+        <label class="checkbox-row">
+
+          <input
+            id="idSignoff"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            I confirm that the uploaded ID belongs to me
+            and that the information provided is correct.
+          </span>
+
+        </label>
+
+
+        <button
+          id="idSubmitBtn"
+          class="primary-btn small"
+          type="submit"
+        >
+          Submit ID for Verification
+        </button>
+
+
+        <p
+          id="idStatus"
+          class="form-message"
+          role="status"
+        ></p>
+
+      </form>
+
+    </div>
+
+
+    <div
+      id="idVerificationStatus"
+      style="margin-top:14px;"
+    ></div>
+
+  </section>
+
+
+  <!-- ============================= -->
   <!-- DOCUMENTS -->
-  <section class="document-grid">
+  <!-- Hidden until ID is submitted -->
+  <!-- ============================= -->
+
+  <section
+    id="documentsSection"
+    class="document-grid"
+    style="display:none;"
+  >
 
     <!-- LOR -->
+
     <article class="document-card">
 
-      <div class="card-icon">LOR</div>
+      <div class="card-icon">
+        LOR
+      </div>
 
       <p class="card-label">
         Letter of Recommendation
       </p>
 
-      <h2>Your LOR</h2>
+      <h2>
+        Your LOR
+      </h2>
 
       <p class="muted">
-        Download your official Letter of Recommendation.
+        Open your official Letter of Recommendation in the PDF viewer.
       </p>
 
       <a
         id="lorLink"
         class="primary-btn small"
         href="#"
-        download
+        target="_blank"
+        rel="noopener"
       >
-        Download LOR
+        Open LOR
       </a>
 
     </article>
 
 
     <!-- CERTIFICATE -->
+
     <article class="document-card featured">
 
-      <div class="card-icon">CERT</div>
+      <div class="card-icon">
+        CERT
+      </div>
 
       <p class="card-label">
         Mentorship Certificate
       </p>
 
-      <h2>Your Certificate</h2>
+      <h2>
+        Your Certificate
+      </h2>
 
       <p class="muted">
-        Download your official certificate and share your achievement.
+        Open your official certificate in the PDF viewer.
+        You can print or download it from there.
       </p>
+
 
       <div class="button-row">
 
@@ -94,10 +208,12 @@
           id="certificateLink"
           class="primary-btn small"
           href="#"
-          download
+          target="_blank"
+          rel="noopener"
         >
-          Download Certificate
+          Open Certificate
         </a>
+
 
         <a
           id="linkedinLink"
@@ -115,25 +231,33 @@
 
 
     <!-- PAYSLIP -->
+
     <article class="document-card">
 
-      <div class="card-icon">PAY</div>
+      <div class="card-icon">
+        PAY
+      </div>
 
       <p class="card-label">
         Payment
       </p>
 
-      <h2>Your Payslip</h2>
+      <h2>
+        Your Payslip
+      </h2>
 
       <p class="muted">
         Your mentorship payment document will be available here.
       </p>
 
       <div style="margin-top:20px;">
+
         <span class="badge">
           Currently Unavailable
         </span>
+
       </div>
+
 
       <button
         class="primary-btn small unavailable"
@@ -149,8 +273,15 @@
   </section>
 
 
+  <!-- ============================= -->
   <!-- PUBLIC VERIFICATION -->
-  <section class="verification-panel">
+  <!-- ============================= -->
+
+  <section
+    id="verificationSection"
+    class="verification-panel"
+    style="display:none;"
+  >
 
     <div>
 
@@ -168,6 +299,7 @@
       </p>
 
     </div>
+
 
     <div class="verification-box">
 
@@ -193,95 +325,16 @@
   </section>
 
 
-  <!-- ID + QUICK INFO -->
-  <section class="feature-grid">
+  <!-- ============================= -->
+  <!-- QUICK INFO -->
+  <!-- ============================= -->
 
+  <section
+    id="infoSection"
+    class="feature-grid"
+    style="display:none;"
+  >
 
-    <!-- ID VERIFICATION -->
-    <article class="document-card">
-
-      <div class="section-heading">
-
-        <p class="eyebrow">
-          IDENTITY VERIFICATION
-        </p>
-
-        <h2>
-          Verify your identity
-        </h2>
-
-        <p class="muted">
-          Upload a valid identity document for CUETbyNTA records.
-          Your document is stored privately and is not publicly accessible.
-        </p>
-
-      </div>
-
-
-      <div class="upload-zone">
-
-        <form id="idUploadForm">
-
-          <label for="idFile">
-            Identity document
-          </label>
-
-          <input
-            id="idFile"
-            type="file"
-            accept="image/jpeg,image/png,application/pdf"
-            required
-          >
-
-          <p class="muted" style="font-size:12px;margin:8px 0 0;">
-            JPG, PNG or PDF · Maximum 5 MB
-          </p>
-
-
-          <label class="checkbox-row">
-
-            <input
-              id="idSignoff"
-              type="checkbox"
-              required
-            >
-
-            <span>
-              I confirm that the uploaded ID belongs to me
-              and that the information provided is correct.
-            </span>
-
-          </label>
-
-
-          <button
-            id="idSubmitBtn"
-            class="primary-btn small"
-            type="submit"
-          >
-            Submit ID for Verification
-          </button>
-
-
-          <p
-            id="idStatus"
-            class="form-message"
-            role="status"
-          ></p>
-
-        </form>
-
-      </div>
-
-      <div
-        id="idVerificationStatus"
-        style="margin-top:14px;"
-      ></div>
-
-    </article>
-
-
-    <!-- QUICK INFO -->
     <article class="document-card">
 
       <div class="section-heading">
@@ -296,7 +349,11 @@
 
       </div>
 
-      <div class="info-grid" style="margin-top:0;">
+
+      <div
+        class="info-grid"
+        style="margin-top:0;"
+      >
 
         <div class="info-card">
 
@@ -366,16 +423,21 @@
 
 
   <!-- IMPORTANT NOTE -->
-  <section class="info-card" style="margin-top:16px;">
+
+  <section
+    id="importantSection"
+    class="info-card"
+    style="display:none;margin-top:16px;"
+  >
 
     <h3>
       Important
     </h3>
 
     <p class="muted">
-      Please keep your account credentials private. Your identity
-      document is submitted securely for CUETbyNTA verification and
-      is not made public.
+      Please keep your account credentials private.
+      Your identity document is submitted securely for
+      CUETbyNTA verification and is not made public.
     </p>
 
   </section>
@@ -383,11 +445,14 @@
 </main>
 
 
-<!-- AUTHENTICATION -->
-<script type="module" src="js/auth.js"></script>
+<script
+  type="module"
+  src="js/auth.js"
+></script>
 
-<!-- DASHBOARD LOGIC -->
-<script src="js/dashboard.js"></script>
+<script
+  src="js/dashboard.js"
+></script>
 
 </body>
 </html>
