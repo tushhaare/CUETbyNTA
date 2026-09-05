@@ -3,70 +3,70 @@ const MENTORS = {
   M001: {
     name: "Tushar",
     certificateId: "CBNTA-M-2026-001",
-    lorFile: "../../assets/mentors/M001/1.pdf",
+    lorFile: "../../assets/mentors/M001/1lor.pdf",
     certificateFile: "../../assets/mentors/M001/1.pdf"
   },
 
   M002: {
     name: "Archi",
     certificateId: "CBNTA-M-2026-002",
-    lorFile: "../../assets/mentors/M002/2.pdf",
+    lorFile: "../../assets/mentors/M002/2lor.pdf",
     certificateFile: "../../assets/mentors/M002/2.pdf"
   },
 
   M003: {
     name: "Ashish",
     certificateId: "CBNTA-M-2026-003",
-    lorFile: "../../assets/mentors/M003/3.pdf",
+    lorFile: "../../assets/mentors/M003/3lor.pdf",
     certificateFile: "../../assets/mentors/M003/3.pdf"
   },
 
   M004: {
     name: "Gauri",
     certificateId: "CBNTA-M-2026-004",
-    lorFile: "../../assets/mentors/M004/4.pdf",
+    lorFile: "../../assets/mentors/M004/4lor.pdf",
     certificateFile: "../../assets/mentors/M004/4.pdf"
   },
 
   M005: {
     name: "Jiya",
     certificateId: "CBNTA-M-2026-005",
-    lorFile: "../../assets/mentors/M005/5.pdf",
+    lorFile: "../../assets/mentors/M005/5lor.pdf",
     certificateFile: "../../assets/mentors/M005/5.pdf"
   },
 
   M006: {
     name: "Khushali",
     certificateId: "CBNTA-M-2026-006",
-    lorFile: "../../assets/mentors/M006/6.pdf",
+    lorFile: "../../assets/mentors/M006/6lor.pdf",
     certificateFile: "../../assets/mentors/M006/6.pdf"
   },
 
   M007: {
     name: "Meenakshi",
     certificateId: "CBNTA-M-2026-007",
-    lorFile: "../../assets/mentors/M007/7.pdf",
+    lorFile: "../../assets/mentors/M007/7lor.pdf",
     certificateFile: "../../assets/mentors/M007/7.pdf"
   },
 
   M008: {
     name: "Prince",
     certificateId: "CBNTA-M-2026-008",
-    lorFile: "../../assets/mentors/M008/8.pdf",
+    lorFile: "../../assets/mentors/M008/8lor.pdf",
     certificateFile: "../../assets/mentors/M008/8.pdf"
   },
 
   M009: {
     name: "Prince",
     certificateId: "CBNTA-M-2026-009",
-    lorFile: "../../assets/mentors/M009/9.pdf",
+    lorFile: "../../assets/mentors/M009/9lor.pdf",
     certificateFile: "../../assets/mentors/M009/9.pdf"
   },
 
   M010: {
     name: "Purvi",
     certificateId: "CBNTA-M-2026-010",
-    lorFile: "../../assets/mentors/M010/10.pdf",
+    lorFile: "../../assets/mentors/M010/10lor.pdf",
     certificateFile: "../../assets/mentors/M010/10.pdf"
   }
 
