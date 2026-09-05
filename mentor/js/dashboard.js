@@ -919,7 +919,6 @@ async function setupIdentityVerification(
  * LINKEDIN — PHONE FIRST
  * =========================================
  */
-
 function setupLinkedInSharing(
   mentor,
   button,
@@ -931,201 +930,61 @@ function setupLinkedInSharing(
   }
 
 
+  /*
+   * LinkedIn post caption
+   */
+
   const caption =
     `Proud to have completed my 10-month mentorship journey with CUETbyNTA as a Mentor.\n\n` +
     `It was a wonderful experience contributing to the student community and helping aspirants navigate their CUET journey.\n\n` +
     `Thank you, CUETbyNTA, for the opportunity.\n\n` +
-    `#CUETbyNTA #CUET #Mentorship #Education`;
+    `#CUETbyNTA #CUET #Mentorship #Education\n\n` +
+    `CUETbyNTA: https://www.linkedin.com/company/cuetbynta`;
 
 
   button.textContent =
-    "Share Certificate on LinkedIn";
+    "Share on LinkedIn";
 
 
-  button.onclick =
-    async () => {
+  button.onclick = () => {
+
+    statusElement.textContent =
+      "Opening LinkedIn...";
+
+
+    /*
+     * Text-only LinkedIn sharing.
+     *
+     * No PDF download.
+     * No native file sharing.
+     */
+
+    const linkedinUrl =
+      "https://www.linkedin.com/feed/?shareActive=true&text=" +
+      encodeURIComponent(
+        caption
+      );
+
+
+    window.open(
+      linkedinUrl,
+      "_blank",
+      "noopener"
+    );
+
+
+    /*
+     * Small instruction for the mentor.
+     */
+
+    setTimeout(() => {
 
       statusElement.textContent =
-        "Preparing your certificate...";
+        "LinkedIn opened with your post caption. You can add your certificate image before posting.";
 
+    }, 700);
 
-      button.disabled =
-        true;
-
-
-      try {
-
-        /*
-         * Fetch certificate PDF.
-         */
-
-        const response =
-          await fetch(
-            mentor.certificateFile
-          );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Certificate could not be loaded."
-          );
-
-        }
-
-
-        const blob =
-          await response.blob();
-
-
-        /*
-         * Convert PDF into a File.
-         */
-
-        const certificateFile =
-          new File(
-            [blob],
-            "CUETbyNTA-Certificate.pdf",
-            {
-              type:
-                "application/pdf"
-            }
-          );
-
-
-        /*
-         * =================================
-         * NATIVE PHONE SHARE
-         * =================================
-         *
-         * This is the primary route.
-         *
-         * On supported Android/iPhone
-         * browsers the operating system's
-         * share sheet will appear.
-         */
-
-        if (
-          navigator.share &&
-          navigator.canShare &&
-          navigator.canShare({
-            files:
-              [certificateFile]
-          })
-        ) {
-
-          statusElement.textContent =
-            "Opening your phone's share options...";
-
-
-          await navigator.share({
-
-            title:
-              "CUETbyNTA Mentorship Certificate",
-
-            text:
-              caption,
-
-            files:
-              [certificateFile]
-
-          });
-
-
-          statusElement.textContent =
-            "Certificate ready to share.";
-
-          return;
-        }
-
-
-
-        /*
-         * =================================
-         * BROWSER FALLBACK
-         * =================================
-         */
-
-        const certificateUrl =
-          new URL(
-            mentor.certificateFile,
-            window.location.href
-          ).href;
-
-
-        /*
-         * Open certificate.
-         */
-
-        window.open(
-          certificateUrl,
-          "_blank"
-        );
-
-
-        /*
-         * Open LinkedIn with caption.
-         */
-
-        const linkedinUrl =
-          "https://www.linkedin.com/feed/?shareActive=true&text=" +
-          encodeURIComponent(
-            caption
-          );
-
-
-        setTimeout(
-          () => {
-
-            window.open(
-              linkedinUrl,
-              "_blank"
-            );
-
-          },
-          500
-        );
-
-
-        statusElement.textContent =
-          "Certificate opened. Attach it to your LinkedIn post and publish.";
-
-
-      } catch (error) {
-
-        console.error(
-          "LinkedIn sharing error:",
-          error
-        );
-
-
-        /*
-         * User cancelled native share.
-         */
-
-        if (
-          error?.name ===
-          "AbortError"
-        ) {
-
-          statusElement.textContent =
-            "";
-
-          return;
-        }
-
-
-        statusElement.textContent =
-          "Unable to open sharing. Please open your certificate and share it manually.";
-
-      } finally {
-
-        button.disabled =
-          false;
-
-      }
-
-    };
+  };
 
 }
 
